@@ -285,17 +285,13 @@
         "version": "765fc34423b93c2ab763670d8d11d99e5f47387c13c161d6f1640dd6d91b7d1c",
         "signature": "765fc34423b93c2ab763670d8d11d99e5f47387c13c161d6f1640dd6d91b7d1c"
       },
-      "./node_modules/@types/mysql/index.d.ts": {
-        "version": "64c77c2816bb60855b637880598fc3b7f1233614e17e09f29d51e7476222b6bf",
-        "signature": "64c77c2816bb60855b637880598fc3b7f1233614e17e09f29d51e7476222b6bf"
-      },
       "./node_modules/argon2/argon2.d.ts": {
         "version": "a2fdc6d46cad59808b8156c78dfec93deb126067e05d2520a322931ee09b0af8",
         "signature": "a2fdc6d46cad59808b8156c78dfec93deb126067e05d2520a322931ee09b0af8"
       },
       "./src/config.ts": {
-        "version": "1b405881ec47554312c62a4529480e4130b95511bc47b7203e8a635ce0a18965",
-        "signature": "8a16468f8d570b5fb17426e945d7a62c018e4e41826910d0ae2fd352d12c16b0"
+        "version": "22cc347712a00a49c5ce5ee7b5ac5ad4248c7d2294c6784fa8bb0ea9c4aead94",
+        "signature": "731bfc36bc1ac739816732f669d7d1a9ba19f7a7fba098cb7e24ec8f90208a1c"
       },
       "./node_modules/colors/index.d.ts": {
         "version": "a17e831d16c27cbe4d6f0bb238c1ded0d4a26c282009e431c68733be0b792f4f",
@@ -341,29 +337,41 @@
         "version": "b614adbcb7e133f27d1581a5d342bbac0eb7a9efb0bfe9a92c65d9d4868a5543",
         "signature": "9bd92829e81d09b1991a61d330b8704fc79dd076062eb1775e688c5e386910dc"
       },
-      "./node_modules/@viva-eng/database/build/query.d.ts": {
-        "version": "5b45795e333614245e380cf4f2a6e582e31a213d1957aa748672170cac5e361e",
-        "signature": "5b45795e333614245e380cf4f2a6e582e31a213d1957aa748672170cac5e361e"
+      "./node_modules/@viva-eng/database/build/query/query.d.ts": {
+        "version": "b848e26f3fe5257cc5673a390ec768a96adc283540bfd41c9970bfec5efeac46",
+        "signature": "b848e26f3fe5257cc5673a390ec768a96adc283540bfd41c9970bfec5efeac46"
       },
       "./node_modules/@viva-eng/database/build/mysql.d.ts": {
-        "version": "a0d1a33298b746f6d554c073191f66ba86902e90b0e4362cd5227e831a647e84",
-        "signature": "a0d1a33298b746f6d554c073191f66ba86902e90b0e4362cd5227e831a647e84"
+        "version": "c948dac4738b8f785deb0f20a4eff29c59a8e76e68aee2c38a66bf3b9319316f",
+        "signature": "c948dac4738b8f785deb0f20a4eff29c59a8e76e68aee2c38a66bf3b9319316f"
       },
       "./node_modules/@viva-eng/database/build/pool.d.ts": {
-        "version": "7cc8ae81024c095b65f1682edfddaf466181be32ab269c9ec0a1476c3e735c62",
-        "signature": "7cc8ae81024c095b65f1682edfddaf466181be32ab269c9ec0a1476c3e735c62"
+        "version": "70366b5de793a3c1afb6434f7bc3adef1203df354e016eecd2df0bb3e5188f05",
+        "signature": "70366b5de793a3c1afb6434f7bc3adef1203df354e016eecd2df0bb3e5188f05"
       },
-      "./node_modules/@viva-eng/database/build/select-query.d.ts": {
-        "version": "64c8c52742837582386ab81984282071cac123f7d858f44bd85cb93b7ca8eaae",
-        "signature": "64c8c52742837582386ab81984282071cac123f7d858f44bd85cb93b7ca8eaae"
+      "./node_modules/@viva-eng/database/build/query/results.d.ts": {
+        "version": "035ae51d91f8742a650cb920c4adf9103a12d1b7581d5f02b9ff66ea3e3dafdc",
+        "signature": "035ae51d91f8742a650cb920c4adf9103a12d1b7581d5f02b9ff66ea3e3dafdc"
       },
-      "./node_modules/@viva-eng/database/build/write-query.d.ts": {
-        "version": "8036f6d938b69c8db6efbd63dadbefa94c9e7215b50df75eb219e67b90a67bd4",
-        "signature": "8036f6d938b69c8db6efbd63dadbefa94c9e7215b50df75eb219e67b90a67bd4"
+      "./node_modules/@viva-eng/database/build/query/select-query.d.ts": {
+        "version": "73d749bfbae1a1628f8807020802b3374a92b476746fd9a51162b2588f6503b8",
+        "signature": "73d749bfbae1a1628f8807020802b3374a92b476746fd9a51162b2588f6503b8"
+      },
+      "./node_modules/@viva-eng/database/build/query/write-query.d.ts": {
+        "version": "258883b33b341e21d09356d3e04bd3a95468195cf4814243635202ad08d1faea",
+        "signature": "258883b33b341e21d09356d3e04bd3a95468195cf4814243635202ad08d1faea"
+      },
+      "./node_modules/@viva-eng/database/build/query/prepared-select-query.d.ts": {
+        "version": "e5a631b30640faf46ef464da4a90ee8b9cd0dbe7b225991271df15e728d9778a",
+        "signature": "e5a631b30640faf46ef464da4a90ee8b9cd0dbe7b225991271df15e728d9778a"
+      },
+      "./node_modules/@viva-eng/database/build/query/prepared-write-query.d.ts": {
+        "version": "19c3e7212e42d6ad8839a30409d755366f5d3a741773782ac0d50f7cda6889ec",
+        "signature": "19c3e7212e42d6ad8839a30409d755366f5d3a741773782ac0d50f7cda6889ec"
       },
       "./node_modules/@viva-eng/database/build/index.d.ts": {
-        "version": "1280ace69765a9251aa21acae5e02af87203f2ea021f8647e80bd1dc588997ac",
-        "signature": "1280ace69765a9251aa21acae5e02af87203f2ea021f8647e80bd1dc588997ac"
+        "version": "259e0e73ee63dc550862a2a6ac5a36345b19c6051de701d0901f51beb4492869",
+        "signature": "259e0e73ee63dc550862a2a6ac5a36345b19c6051de701d0901f51beb4492869"
       },
       "./src/database.ts": {
         "version": "919f897f29da12378a952878059fa9f43f7f47bf3ed08cc3821adccb1377ffa5",
@@ -454,7 +462,7 @@
         "signature": "bd33c63f48baf4271efce50d9e1af6d63862ae8bbfbfc25b3f7c82027dbd4dd3"
       },
       "./src/server.ts": {
-        "version": "5ca1f9eb31ed1633da94be7b823c0c18336af22fba5c952df69c1bf169b1df20",
+        "version": "a8378302903c289b1f00c1000de242e770051e9214ef732d7c99e5437f063035",
         "signature": "40b8df89ff8f823be77c653dec7bed40ac80b1c6a41b6a122c72c7577bde7a08"
       },
       "./src/start.ts": {
@@ -494,7 +502,7 @@
         "signature": "47ba6e96589d733fe03e500e1b4a30825f35d4fcd7b0d8eadc5b473f4ddec95f"
       },
       "./src/reference-data/table.ts": {
-        "version": "e18e2290b8622b890894093f668fb632f673920c1729233f3eab1fa9c9c38a3b",
+        "version": "304cb983cbdd38c67f0f9cedd2962c0ce311bddfeb0211cf5ad62d6cc44debd1",
         "signature": "65d00202ed48f47db55b4e374c36c58c76c3f4cdbfc4d157cc830ebf7c10b49e"
       },
       "./src/reference-data/index.ts": {
@@ -502,11 +510,11 @@
         "signature": "26499d02ae6309c1e3b0b303a9f888ab7007ca2e9151af3bcec9190bba44fa08"
       },
       "./src/middlewares/authenticate.ts": {
-        "version": "c18a15fcc36dd82de5d02998cc48a30c696e7944e03f7e5edc2e01fa06607807",
+        "version": "be3c5aa520336e68fb830f28d66a44fbff3351d1d6f9f081e6afd39e68043d69",
         "signature": "c685f9a1dca4cf948ce08d6185d8f6fba0653d104c877df86c7bac572ffffef3"
       },
       "./src/endpoints/credential/password/create/queries/create-credential.ts": {
-        "version": "5eb83ff303777252d1d7fc43d0a69cd76272640591b7f6b04746cabd6d113009",
+        "version": "088209dff9ab02b927631f68c95631317a6385a987403e34861bf7fa5b12ab57",
         "signature": "9d8a688b211104549052effd9093a895c5b4ca6db94f1185ad7ff3ba2aa64cd9"
       },
       "./src/endpoints/credential/password/create/service.ts": {
@@ -526,19 +534,19 @@
         "signature": "f65fffbd1ab471608be726245a091b8cb82cb55fa340282e09fe719b9c7d04ca"
       },
       "./src/endpoints/registration/create/queries/lookup-email.ts": {
-        "version": "936eca947f7bb35ed510cd72f0828b70cec6c8ebeea66652c3bb22cc414e33e0",
-        "signature": "588dcccb9b3149bab2811f7cb38d2bff7ce6a47f51eae81db250df540c96d25b"
+        "version": "c0d7883734d47ead56de211736eabc75ad9dc95ef5a8b46ebf661a6e039da0de",
+        "signature": "cdec5931fb41507d8e2f7a6d1f1fd4a4e7de68a0408ed95b9da2c4eefed78d7c"
       },
       "./src/endpoints/registration/create/queries/create-user.ts": {
-        "version": "d7c4c469491ad4357b44d504a3b0953911ff783119aeb4be69deba9058665e47",
-        "signature": "3821bd88b039b8ed93901a165fe5b47043159d4b2cb2e1b8b21d8c1024fc6659"
+        "version": "347beac049ddb8e8037590612d51805b960e44a9789067fb05ae2b902af64139",
+        "signature": "d6dfcf188b803d8af56404ff5d5e4fa57a7f042fdfeed243640ba0d8415eef7f"
       },
       "./src/endpoints/registration/create/queries/create-email-credential.ts": {
-        "version": "aaec8734442a1930c809465854a9ada5d13358b943e3a1a4008b9ebdae2a8a9d",
-        "signature": "e6c925f9d89ab9866fe8869131a9dedd4694a9c46b1795869560f5dde6c9bcae"
+        "version": "858298d14ef533f1a16255b9e8ed5265707c990288ecb48bb38c3673dfc13442",
+        "signature": "2ce90802eae802ef402f5c6c720d9d4e57b8e1bfb74c874d90e97e31f1fbb262"
       },
       "./src/endpoints/registration/create/service.ts": {
-        "version": "a3976d0232aa78d49ff0c0d4e337d94e6cec80fddeed8f9e034e0873ecda1679",
+        "version": "be6badad17ef8ba1400eb856c71bad006877feca4c2fe206162e98cecaf02bbe",
         "signature": "0dde118d305ada49fd3fa29982a7fb205f762fc417df4b91dc2f58b86471e7ac"
       },
       "./src/endpoints/registration/create/endpoint.ts": {
@@ -550,19 +558,19 @@
         "signature": "b0048c7ccc6b9fb374e491dfbc88f59d8fe5243568f912935b7e14e6e59f143b"
       },
       "./src/endpoints/session/create/from-email/queries/get-credential.ts": {
-        "version": "d9f4f26d76dd0ac0783de7a4fe88d33f20a08603277e9ecc171aa24f4ebc7e27",
+        "version": "e74f46b8b9202ef77ef408626fb0841246ef19586cc8a9d7b8703329bcde68d3",
         "signature": "0178f84c1cee67eb27a7a9a40828f019ad858f8bd2bdf0a7557406c3778813de"
       },
       "./src/endpoints/session/create/from-email/queries/delete-credential.ts": {
-        "version": "9dcf5f8fba198331aa57b770c1a9f966512fd8e1c45e4e0dae026decf812bbbe",
+        "version": "f031271d5e8e03853b277a8ea4166fb79051d5c16ec75b0001519d236ebaee73",
         "signature": "d33bc8e40c92df1513173a8c3783401dc9125c678f0df7743871483d43430b04"
       },
       "./src/endpoints/session/create/from-email/queries/record-failure.ts": {
-        "version": "7ff349f2717732ac804caaa2532a49083ad2c31d9075cddf694f7dd76998a1ff",
+        "version": "dd54d01814907c2d066a2bccfe8d0228b185ef69d0da7073b852f44eb4a1512e",
         "signature": "00032b71d563ba623a940220c5ce6750b2a6660f9dd06989243a490b115e9a55"
       },
       "./src/endpoints/session/create/queries/create-session.ts": {
-        "version": "393d0597bc46588c77ffb77e1c7ce0d8a1e7556013d7bc6f039115801dcf5b5b",
+        "version": "0053b7ef6d7521036c4d0cf615fcf323a8880f9e93a231b41c8109a9f3caf364",
         "signature": "2513e153116fdd6c16a5afb14c545d1872ff7455d1adfa8899f2d54d457e7514"
       },
       "./src/endpoints/session/create/from-email/service.ts": {
@@ -578,19 +586,19 @@
         "signature": "cd53ef38cca82f1713905916928d1711a9a76e98a0f7f689dd73d6482e2a1e8b"
       },
       "./src/endpoints/session/create/from-password/queries/get-password-credentials.ts": {
-        "version": "76c5c347fc8c5c59b45a4db23f1e77ccbe3b01632ad2353c7dacdf639ce701b5",
+        "version": "60d2b0541106286cb06631332448de9be091c8b42f995bec5a38dba7cd67bc6c",
         "signature": "5a3c845ee93a758a5131d94a965483af6709f11349d957acd56342277c0e3b92"
       },
       "./src/endpoints/session/create/from-password/queries/increase-failures.ts": {
-        "version": "ad0fb4586fff570adc30b703a885b517878ec48cfc3326312a26ef46b8a7a8d4",
+        "version": "06fa911edb60d2e3389341698f61cec33e96a3a27f36d2aa8dd7e87cae7c5a01",
         "signature": "35eff3e37a542cd21f312528ec47eb9a9cf097797df53f4b8021e03e456bc717"
       },
       "./src/endpoints/session/create/from-password/queries/mark-compromised.ts": {
-        "version": "3dccbc1af5b8895685684931d38e47d061d559be5f4b3e3de4e731339794e724",
+        "version": "5c57096843308beebd16b362a78cbc43e66f8da1efe131c1f8c89e34d6edbd0a",
         "signature": "3b00aa8e78d4729c172a87c202cf1a4e8ddcc27e60a3b35e73d3f4f5017f42ae"
       },
       "./src/endpoints/session/create/from-password/queries/reduce-failures.ts": {
-        "version": "0cbd002d59c4b4d865f4d7fa2cb7dbbf46e57dd6b05bfc5c899b7b9ed4c6eae5",
+        "version": "b5f537fdfa2967a76c083343a3bb751a89c5079522e840cc2e5db262330100e9",
         "signature": "818e4e35c32a757fb4beb84bf431fda7e2c733c24536cb4fee79e92d038b41ee"
       },
       "./src/endpoints/session/create/from-password/service.ts": {
@@ -620,6 +628,10 @@
       "./node_modules/@types/json-schema/index.d.ts": {
         "version": "751b8d5b85eee82bd38964a6ff43e89e61a586c64f653e3d1eb8fa7eb372ed30",
         "signature": "751b8d5b85eee82bd38964a6ff43e89e61a586c64f653e3d1eb8fa7eb372ed30"
+      },
+      "./node_modules/@types/mysql/index.d.ts": {
+        "version": "64c77c2816bb60855b637880598fc3b7f1233614e17e09f29d51e7476222b6bf",
+        "signature": "64c77c2816bb60855b637880598fc3b7f1233614e17e09f29d51e7476222b6bf"
       }
     },
     "options": {
@@ -1012,20 +1024,12 @@
         "./node_modules/@types/node/ts3.2/globals.d.ts",
         "./node_modules/@types/node/util.d.ts"
       ],
-      "./node_modules/@types/mysql/index.d.ts": [
-        "./node_modules/@types/node/stream.d.ts",
-        "./node_modules/@types/node/tls.d.ts",
-        "./node_modules/@types/node/ts3.2/index.d.ts",
-        "./node_modules/@types/node/util.d.ts",
-        "./node_modules/@types/node/ts3.2/util.d.ts"
-      ],
       "./node_modules/argon2/argon2.d.ts": [
         "./node_modules/@types/node/ts3.2/index.d.ts",
         "./node_modules/@types/node/util.d.ts",
         "./node_modules/@types/node/ts3.2/util.d.ts"
       ],
       "./src/config.ts": [
-        "./node_modules/@types/mysql/index.d.ts",
         "./node_modules/argon2/argon2.d.ts",
         "./node_modules/@types/node/util.d.ts",
         "./node_modules/@types/node/ts3.2/util.d.ts"
@@ -1103,46 +1107,64 @@
         "./node_modules/@types/node/util.d.ts",
         "./node_modules/@types/node/ts3.2/util.d.ts"
       ],
-      "./node_modules/@viva-eng/database/build/query.d.ts": [
-        "./node_modules/@types/mysql/index.d.ts",
+      "./node_modules/@viva-eng/database/build/query/query.d.ts": [
         "./node_modules/@viva-eng/logger/build/index.d.ts",
         "./node_modules/@types/node/util.d.ts",
         "./node_modules/@types/node/ts3.2/util.d.ts"
       ],
       "./node_modules/@viva-eng/database/build/mysql.d.ts": [
         "./node_modules/@viva-eng/database/build/pool.d.ts",
-        "./node_modules/@types/mysql/index.d.ts",
         "./node_modules/@viva-eng/logger/build/index.d.ts",
         "./node_modules/@types/node/util.d.ts",
         "./node_modules/@types/node/ts3.2/util.d.ts"
       ],
       "./node_modules/@viva-eng/database/build/pool.d.ts": [
         "./node_modules/@viva-eng/logger/build/index.d.ts",
-        "./node_modules/@types/mysql/index.d.ts",
-        "./node_modules/@viva-eng/database/build/query.d.ts",
+        "./node_modules/@viva-eng/database/build/query/query.d.ts",
         "./node_modules/@viva-eng/database/build/mysql.d.ts",
         "./node_modules/@types/node/util.d.ts",
         "./node_modules/@types/node/ts3.2/util.d.ts"
       ],
-      "./node_modules/@viva-eng/database/build/select-query.d.ts": [
-        "./node_modules/@viva-eng/database/build/query.d.ts",
-        "./node_modules/@types/mysql/index.d.ts",
+      "./node_modules/@viva-eng/database/build/query/results.d.ts": [
+        "./node_modules/@types/node/util.d.ts",
+        "./node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "./node_modules/@viva-eng/database/build/query/select-query.d.ts": [
+        "./node_modules/@viva-eng/database/build/query/query.d.ts",
+        "./node_modules/@viva-eng/database/build/query/results.d.ts",
         "./node_modules/@viva-eng/logger/build/index.d.ts",
         "./node_modules/@types/node/util.d.ts",
         "./node_modules/@types/node/ts3.2/util.d.ts"
       ],
-      "./node_modules/@viva-eng/database/build/write-query.d.ts": [
-        "./node_modules/@viva-eng/database/build/query.d.ts",
-        "./node_modules/@types/mysql/index.d.ts",
+      "./node_modules/@viva-eng/database/build/query/write-query.d.ts": [
+        "./node_modules/@viva-eng/database/build/query/query.d.ts",
+        "./node_modules/@viva-eng/database/build/query/results.d.ts",
+        "./node_modules/@viva-eng/logger/build/index.d.ts",
+        "./node_modules/@types/node/util.d.ts",
+        "./node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "./node_modules/@viva-eng/database/build/query/prepared-select-query.d.ts": [
+        "./node_modules/@viva-eng/database/build/query/query.d.ts",
+        "./node_modules/@viva-eng/database/build/query/results.d.ts",
+        "./node_modules/@viva-eng/logger/build/index.d.ts",
+        "./node_modules/@types/node/util.d.ts",
+        "./node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "./node_modules/@viva-eng/database/build/query/prepared-write-query.d.ts": [
+        "./node_modules/@viva-eng/database/build/query/query.d.ts",
+        "./node_modules/@viva-eng/database/build/query/results.d.ts",
         "./node_modules/@viva-eng/logger/build/index.d.ts",
         "./node_modules/@types/node/util.d.ts",
         "./node_modules/@types/node/ts3.2/util.d.ts"
       ],
       "./node_modules/@viva-eng/database/build/index.d.ts": [
         "./node_modules/@viva-eng/database/build/pool.d.ts",
-        "./node_modules/@viva-eng/database/build/query.d.ts",
-        "./node_modules/@viva-eng/database/build/select-query.d.ts",
-        "./node_modules/@viva-eng/database/build/write-query.d.ts",
+        "./node_modules/@viva-eng/database/build/query/query.d.ts",
+        "./node_modules/@viva-eng/database/build/query/results.d.ts",
+        "./node_modules/@viva-eng/database/build/query/select-query.d.ts",
+        "./node_modules/@viva-eng/database/build/query/write-query.d.ts",
+        "./node_modules/@viva-eng/database/build/query/prepared-select-query.d.ts",
+        "./node_modules/@viva-eng/database/build/query/prepared-write-query.d.ts",
         "./node_modules/@viva-eng/database/build/mysql.d.ts",
         "./node_modules/@types/node/util.d.ts",
         "./node_modules/@types/node/ts3.2/util.d.ts"
@@ -1349,7 +1371,6 @@
         "./node_modules/@types/node/ts3.2/util.d.ts"
       ],
       "./src/reference-data/table.ts": [
-        "./node_modules/@types/mysql/index.d.ts",
         "./src/database.ts",
         "./src/config.ts",
         "./src/logger/index.ts",
@@ -1363,7 +1384,6 @@
         "./node_modules/@types/node/ts3.2/util.d.ts"
       ],
       "./src/middlewares/authenticate.ts": [
-        "./node_modules/@types/mysql/index.d.ts",
         "./src/database.ts",
         "./node_modules/@viva-eng/database/build/index.d.ts",
         "./node_modules/@celeri/http-server/build/index.d.ts",
@@ -1375,7 +1395,6 @@
         "./node_modules/@types/node/ts3.2/util.d.ts"
       ],
       "./src/endpoints/credential/password/create/queries/create-credential.ts": [
-        "./node_modules/@types/mysql/index.d.ts",
         "./node_modules/@viva-eng/database/build/index.d.ts",
         "./src/reference-data/index.ts",
         "./src/config.ts",
@@ -1418,20 +1437,17 @@
         "./node_modules/@types/node/ts3.2/util.d.ts"
       ],
       "./src/endpoints/registration/create/queries/lookup-email.ts": [
-        "./node_modules/@types/mysql/index.d.ts",
         "./src/database.ts",
         "./node_modules/@viva-eng/database/build/index.d.ts",
         "./node_modules/@types/node/util.d.ts",
         "./node_modules/@types/node/ts3.2/util.d.ts"
       ],
       "./src/endpoints/registration/create/queries/create-user.ts": [
-        "./node_modules/@types/mysql/index.d.ts",
         "./node_modules/@viva-eng/database/build/index.d.ts",
         "./node_modules/@types/node/util.d.ts",
         "./node_modules/@types/node/ts3.2/util.d.ts"
       ],
       "./src/endpoints/registration/create/queries/create-email-credential.ts": [
-        "./node_modules/@types/mysql/index.d.ts",
         "./node_modules/@viva-eng/database/build/index.d.ts",
         "./src/reference-data/index.ts",
         "./node_modules/@types/node/util.d.ts",
@@ -1439,7 +1455,6 @@
       ],
       "./src/endpoints/registration/create/service.ts": [
         "./src/database.ts",
-        "./node_modules/@types/mysql/index.d.ts",
         "./node_modules/@viva-eng/database/build/index.d.ts",
         "./src/endpoints/registration/create/queries/lookup-email.ts",
         "./src/endpoints/registration/create/queries/create-user.ts",
@@ -1468,7 +1483,6 @@
         "./node_modules/@types/node/ts3.2/util.d.ts"
       ],
       "./src/endpoints/session/create/from-email/queries/get-credential.ts": [
-        "./node_modules/@types/mysql/index.d.ts",
         "./src/database.ts",
         "./node_modules/@viva-eng/database/build/index.d.ts",
         "./src/reference-data/index.ts",
@@ -1476,19 +1490,16 @@
         "./node_modules/@types/node/ts3.2/util.d.ts"
       ],
       "./src/endpoints/session/create/from-email/queries/delete-credential.ts": [
-        "./node_modules/@types/mysql/index.d.ts",
         "./node_modules/@viva-eng/database/build/index.d.ts",
         "./node_modules/@types/node/util.d.ts",
         "./node_modules/@types/node/ts3.2/util.d.ts"
       ],
       "./src/endpoints/session/create/from-email/queries/record-failure.ts": [
-        "./node_modules/@types/mysql/index.d.ts",
         "./node_modules/@viva-eng/database/build/index.d.ts",
         "./node_modules/@types/node/util.d.ts",
         "./node_modules/@types/node/ts3.2/util.d.ts"
       ],
       "./src/endpoints/session/create/queries/create-session.ts": [
-        "./node_modules/@types/mysql/index.d.ts",
         "./node_modules/@viva-eng/database/build/index.d.ts",
         "./src/config.ts",
         "./node_modules/@types/node/util.d.ts",
@@ -1526,7 +1537,6 @@
         "./node_modules/@types/node/ts3.2/util.d.ts"
       ],
       "./src/endpoints/session/create/from-password/queries/get-password-credentials.ts": [
-        "./node_modules/@types/mysql/index.d.ts",
         "./src/database.ts",
         "./node_modules/@viva-eng/database/build/index.d.ts",
         "./src/reference-data/index.ts",
@@ -1534,19 +1544,16 @@
         "./node_modules/@types/node/ts3.2/util.d.ts"
       ],
       "./src/endpoints/session/create/from-password/queries/increase-failures.ts": [
-        "./node_modules/@types/mysql/index.d.ts",
         "./node_modules/@viva-eng/database/build/index.d.ts",
         "./node_modules/@types/node/util.d.ts",
         "./node_modules/@types/node/ts3.2/util.d.ts"
       ],
       "./src/endpoints/session/create/from-password/queries/mark-compromised.ts": [
-        "./node_modules/@types/mysql/index.d.ts",
         "./node_modules/@viva-eng/database/build/index.d.ts",
         "./node_modules/@types/node/util.d.ts",
         "./node_modules/@types/node/ts3.2/util.d.ts"
       ],
       "./src/endpoints/session/create/from-password/queries/reduce-failures.ts": [
-        "./node_modules/@types/mysql/index.d.ts",
         "./node_modules/@viva-eng/database/build/index.d.ts",
         "./node_modules/@types/node/util.d.ts",
         "./node_modules/@types/node/ts3.2/util.d.ts"
@@ -1607,6 +1614,13 @@
         "./node_modules/@types/node/ts3.2/util.d.ts"
       ],
       "./node_modules/@types/json-schema/index.d.ts": [
+        "./node_modules/@types/node/util.d.ts",
+        "./node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "./node_modules/@types/mysql/index.d.ts": [
+        "./node_modules/@types/node/stream.d.ts",
+        "./node_modules/@types/node/tls.d.ts",
+        "./node_modules/@types/node/ts3.2/index.d.ts",
         "./node_modules/@types/node/util.d.ts",
         "./node_modules/@types/node/ts3.2/util.d.ts"
       ]
@@ -1986,21 +2000,13 @@
         "./node_modules/@types/node/ts3.2/globals.d.ts",
         "./node_modules/@types/node/util.d.ts"
       ],
-      "./node_modules/@types/mysql/index.d.ts": [
-        "./node_modules/@types/node/stream.d.ts",
-        "./node_modules/@types/node/tls.d.ts",
-        "./node_modules/@types/node/ts3.2/index.d.ts",
-        "./node_modules/@types/node/util.d.ts",
-        "./node_modules/@types/node/ts3.2/util.d.ts"
-      ],
       "./node_modules/argon2/argon2.d.ts": [
         "./node_modules/@types/node/ts3.2/index.d.ts",
         "./node_modules/@types/node/util.d.ts",
         "./node_modules/@types/node/ts3.2/util.d.ts"
       ],
       "./src/config.ts": [
-        "./node_modules/argon2/argon2.d.ts",
-        "./node_modules/@types/mysql/index.d.ts"
+        "./node_modules/argon2/argon2.d.ts"
       ],
       "./node_modules/colors/index.d.ts": [
         "./node_modules/@types/node/util.d.ts",
@@ -2065,46 +2071,64 @@
       "./src/utils/shutdown.ts": [
         "./node_modules/@viva-eng/logger/build/index.d.ts"
       ],
-      "./node_modules/@viva-eng/database/build/query.d.ts": [
-        "./node_modules/@types/mysql/index.d.ts",
+      "./node_modules/@viva-eng/database/build/query/query.d.ts": [
         "./node_modules/@viva-eng/logger/build/index.d.ts",
         "./node_modules/@types/node/util.d.ts",
         "./node_modules/@types/node/ts3.2/util.d.ts"
       ],
       "./node_modules/@viva-eng/database/build/mysql.d.ts": [
         "./node_modules/@viva-eng/database/build/pool.d.ts",
-        "./node_modules/@types/mysql/index.d.ts",
         "./node_modules/@viva-eng/logger/build/index.d.ts",
         "./node_modules/@types/node/util.d.ts",
         "./node_modules/@types/node/ts3.2/util.d.ts"
       ],
       "./node_modules/@viva-eng/database/build/pool.d.ts": [
         "./node_modules/@viva-eng/logger/build/index.d.ts",
-        "./node_modules/@types/mysql/index.d.ts",
-        "./node_modules/@viva-eng/database/build/query.d.ts",
+        "./node_modules/@viva-eng/database/build/query/query.d.ts",
         "./node_modules/@viva-eng/database/build/mysql.d.ts",
         "./node_modules/@types/node/util.d.ts",
         "./node_modules/@types/node/ts3.2/util.d.ts"
       ],
-      "./node_modules/@viva-eng/database/build/select-query.d.ts": [
-        "./node_modules/@viva-eng/database/build/query.d.ts",
-        "./node_modules/@types/mysql/index.d.ts",
+      "./node_modules/@viva-eng/database/build/query/results.d.ts": [
+        "./node_modules/@types/node/util.d.ts",
+        "./node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "./node_modules/@viva-eng/database/build/query/select-query.d.ts": [
+        "./node_modules/@viva-eng/database/build/query/query.d.ts",
+        "./node_modules/@viva-eng/database/build/query/results.d.ts",
         "./node_modules/@viva-eng/logger/build/index.d.ts",
         "./node_modules/@types/node/util.d.ts",
         "./node_modules/@types/node/ts3.2/util.d.ts"
       ],
-      "./node_modules/@viva-eng/database/build/write-query.d.ts": [
-        "./node_modules/@viva-eng/database/build/query.d.ts",
-        "./node_modules/@types/mysql/index.d.ts",
+      "./node_modules/@viva-eng/database/build/query/write-query.d.ts": [
+        "./node_modules/@viva-eng/database/build/query/query.d.ts",
+        "./node_modules/@viva-eng/database/build/query/results.d.ts",
+        "./node_modules/@viva-eng/logger/build/index.d.ts",
+        "./node_modules/@types/node/util.d.ts",
+        "./node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "./node_modules/@viva-eng/database/build/query/prepared-select-query.d.ts": [
+        "./node_modules/@viva-eng/database/build/query/query.d.ts",
+        "./node_modules/@viva-eng/database/build/query/results.d.ts",
+        "./node_modules/@viva-eng/logger/build/index.d.ts",
+        "./node_modules/@types/node/util.d.ts",
+        "./node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "./node_modules/@viva-eng/database/build/query/prepared-write-query.d.ts": [
+        "./node_modules/@viva-eng/database/build/query/query.d.ts",
+        "./node_modules/@viva-eng/database/build/query/results.d.ts",
         "./node_modules/@viva-eng/logger/build/index.d.ts",
         "./node_modules/@types/node/util.d.ts",
         "./node_modules/@types/node/ts3.2/util.d.ts"
       ],
       "./node_modules/@viva-eng/database/build/index.d.ts": [
         "./node_modules/@viva-eng/database/build/pool.d.ts",
-        "./node_modules/@viva-eng/database/build/query.d.ts",
-        "./node_modules/@viva-eng/database/build/select-query.d.ts",
-        "./node_modules/@viva-eng/database/build/write-query.d.ts",
+        "./node_modules/@viva-eng/database/build/query/query.d.ts",
+        "./node_modules/@viva-eng/database/build/query/results.d.ts",
+        "./node_modules/@viva-eng/database/build/query/select-query.d.ts",
+        "./node_modules/@viva-eng/database/build/query/write-query.d.ts",
+        "./node_modules/@viva-eng/database/build/query/prepared-select-query.d.ts",
+        "./node_modules/@viva-eng/database/build/query/prepared-write-query.d.ts",
         "./node_modules/@viva-eng/database/build/mysql.d.ts",
         "./node_modules/@types/node/util.d.ts",
         "./node_modules/@types/node/ts3.2/util.d.ts"
@@ -2328,6 +2352,13 @@
       "./node_modules/@types/json-schema/index.d.ts": [
         "./node_modules/@types/node/util.d.ts",
         "./node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "./node_modules/@types/mysql/index.d.ts": [
+        "./node_modules/@types/node/stream.d.ts",
+        "./node_modules/@types/node/tls.d.ts",
+        "./node_modules/@types/node/ts3.2/index.d.ts",
+        "./node_modules/@types/node/util.d.ts",
+        "./node_modules/@types/node/ts3.2/util.d.ts"
       ]
     },
     "semanticDiagnosticsPerFile": [
@@ -2402,7 +2433,6 @@
       "./node_modules/@types/node/ts3.2/util.d.ts",
       "./node_modules/@types/node/ts3.2/globals.d.ts",
       "./node_modules/@types/node/ts3.2/index.d.ts",
-      "./node_modules/@types/mysql/index.d.ts",
       "./node_modules/argon2/argon2.d.ts",
       "./src/config.ts",
       "./node_modules/colors/index.d.ts",
@@ -2416,12 +2446,16 @@
       "./src/logger/pretty.ts",
       "./src/logger/index.ts",
       "./src/utils/shutdown.ts",
-      "./node_modules/@viva-eng/database/build/query.d.ts",
+      "./node_modules/@viva-eng/database/build/query/query.d.ts",
       "./node_modules/@viva-eng/database/build/mysql.d.ts",
       "./node_modules/@viva-eng/database/build/pool.d.ts",
-      "./node_modules/@viva-eng/database/build/select-query.d.ts",
-      "./node_modules/@viva-eng/database/build/write-query.d.ts",
+      "./node_modules/@viva-eng/database/build/query/results.d.ts",
+      "./node_modules/@viva-eng/database/build/query/select-query.d.ts",
+      "./node_modules/@viva-eng/database/build/query/write-query.d.ts",
+      "./node_modules/@viva-eng/database/build/query/prepared-select-query.d.ts",
+      "./node_modules/@viva-eng/database/build/query/prepared-write-query.d.ts",
       "./node_modules/@viva-eng/database/build/index.d.ts",
+      "./src/database.ts",
       "./node_modules/@celeri/middleware-pipeline/build/index.d.ts",
       "./node_modules/@celeri/router/build/interface.d.ts",
       "./node_modules/@celeri/router/build/regex-router/route.d.ts",
@@ -2442,6 +2476,7 @@
       "./node_modules/@celeri/http-error/build/index.d.ts",
       "./src/middlewares/error-handler.ts",
       "./src/utils/random-keys.ts",
+      "./src/middlewares/request-id.ts",
       "./src/start.ts",
       "./node_modules/@viva-eng/payload-validator/build/field-types/field.d.ts",
       "./node_modules/@viva-eng/payload-validator/build/field-types/string.d.ts",
@@ -2451,41 +2486,40 @@
       "./src/utils/validate-schema.ts",
       "./src/endpoints/credential/password/create/params.ts",
       "./src/utils/hasher.ts",
+      "./src/reference-data/table.ts",
       "./src/reference-data/index.ts",
+      "./src/middlewares/authenticate.ts",
       "./src/endpoints/credential/password/create/queries/create-credential.ts",
+      "./src/endpoints/credential/password/create/service.ts",
+      "./src/endpoints/credential/password/create/endpoint.ts",
+      "./src/endpoints/healthcheck/endpoint.ts",
       "./src/endpoints/registration/create/params.ts",
+      "./src/endpoints/registration/create/queries/lookup-email.ts",
       "./src/endpoints/registration/create/queries/create-user.ts",
       "./src/endpoints/registration/create/queries/create-email-credential.ts",
+      "./src/endpoints/registration/create/service.ts",
+      "./src/endpoints/registration/create/endpoint.ts",
       "./src/endpoints/session/create/from-email/params.ts",
+      "./src/endpoints/session/create/from-email/queries/get-credential.ts",
       "./src/endpoints/session/create/from-email/queries/delete-credential.ts",
       "./src/endpoints/session/create/from-email/queries/record-failure.ts",
       "./src/endpoints/session/create/queries/create-session.ts",
+      "./src/endpoints/session/create/from-email/service.ts",
+      "./src/endpoints/session/create/from-email/endpoint.ts",
       "./src/endpoints/session/create/from-password/params.ts",
+      "./src/endpoints/session/create/from-password/queries/get-password-credentials.ts",
       "./src/endpoints/session/create/from-password/queries/increase-failures.ts",
       "./src/endpoints/session/create/from-password/queries/mark-compromised.ts",
       "./src/endpoints/session/create/from-password/queries/reduce-failures.ts",
+      "./src/endpoints/session/create/from-password/service.ts",
+      "./src/endpoints/session/create/from-password/endpoint.ts",
+      "./src/endpoints/session/create/from-session/service.ts",
+      "./src/endpoints/session/create/from-session/endpoint.ts",
+      "./src/endpoints/session/introspect/endpoint.ts",
       "./node_modules/@types/eslint-visitor-keys/index.d.ts",
       "./node_modules/@types/json-schema/index.d.ts",
-      "./src/database.ts",
-      "./src/endpoints/session/create/from-session/service.ts",
-      "./src/endpoints/session/create/from-password/service.ts",
-      "./src/endpoints/session/create/from-password/queries/get-password-credentials.ts",
-      "./src/endpoints/session/create/from-email/service.ts",
-      "./src/endpoints/session/create/from-email/queries/get-credential.ts",
-      "./src/endpoints/registration/create/service.ts",
-      "./src/endpoints/registration/create/queries/lookup-email.ts",
-      "./src/endpoints/healthcheck/endpoint.ts",
-      "./src/endpoints/credential/password/create/service.ts",
-      "./src/middlewares/authenticate.ts",
-      "./src/reference-data/table.ts",
-      "./src/server.ts",
-      "./src/middlewares/request-id.ts",
-      "./src/endpoints/credential/password/create/endpoint.ts",
-      "./src/endpoints/registration/create/endpoint.ts",
-      "./src/endpoints/session/create/from-email/endpoint.ts",
-      "./src/endpoints/session/create/from-password/endpoint.ts",
-      "./src/endpoints/session/create/from-session/endpoint.ts",
-      "./src/endpoints/session/introspect/endpoint.ts"
+      "./node_modules/@types/mysql/index.d.ts",
+      "./src/server.ts"
     ]
   },
   "version": "3.7.3"

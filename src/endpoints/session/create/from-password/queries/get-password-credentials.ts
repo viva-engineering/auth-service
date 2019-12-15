@@ -1,5 +1,5 @@
 
-import { format } from 'mysql';
+import { format } from 'mysql2';
 import { db, Bit } from '../../../../../database';
 import { SelectQuery } from '@viva-eng/database';
 import { CredentialType, credentialTypes } from '../../../../../reference-data';

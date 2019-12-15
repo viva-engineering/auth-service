@@ -1,5 +1,5 @@
 
-import { format } from 'mysql';
+import { format } from 'mysql2';
 import { db } from '../database';
 import { config } from '../config';
 import { logger } from '../logger';

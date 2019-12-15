@@ -1,5 +1,5 @@
 
-import { format } from 'mysql';
+import { format } from 'mysql2';
 import { WriteQuery } from '@viva-eng/database';
 
 export interface ReduceFailuresParams {

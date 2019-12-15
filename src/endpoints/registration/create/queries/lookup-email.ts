@@ -1,7 +1,7 @@
 
-import { format } from 'mysql';
+import { format } from 'mysql2';
 import { Bit } from '../../../../database';
-import { SelectQuery } from '@viva-eng/database';
+import { PreparedSelectQuery } from '@viva-eng/database';
 
 export interface LookupEmailParams {
 	email: string;
@@ -13,25 +13,24 @@ export interface LookupEmailRecord {
 	email_verified: Bit;
 }
 
-const queryTemplate = `
-	select
-		user.id as id,
-		user.email as email,
-		user.email_verified as email_verified
-	from user user
-	where user.email = ?
-`;
-
-export const lookupEmail = new SelectQuery<LookupEmailParams, LookupEmailRecord>({
+export const lookupEmail = new PreparedSelectQuery<LookupEmailParams, LookupEmailRecord>({
 	description: 'select ... from user where email = ?',
+	prepared: `
+		select
+			user.id as id,
+			user.email as email,
+			user.email_verified as email_verified
+		from user user
+		where user.email = ?
+	`,
+
+	prepareParams(params: LookupEmailParams) {
+		return [ params.email ];
+	},
 
 	maxRetries: 2,
 
 	isRetryable() {
 		return false;
-	},
-
-	compile(params: LookupEmailParams) {
-		return format(queryTemplate, [ params.email ]);
 	}
 });

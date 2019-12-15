@@ -1,6 +1,6 @@
 
 import { db } from '../../../database';
-import { PoolConnection } from 'mysql';
+import { PoolConnection } from 'mysql2';
 import { TransactionType } from '@viva-eng/database';
 import { lookupEmail } from './queries/lookup-email';
 import { createUser } from './queries/create-user';

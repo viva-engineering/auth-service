@@ -1,5 +1,5 @@
 
-import { PoolConfig } from 'mysql';
+import { PoolConfig } from 'mysql2';
 import { Options as HasherOptions, argon2id } from 'argon2';
 
 export interface Config {
@@ -46,7 +46,7 @@ export const config: Config = {
 	logging: {
 		colors: true,
 		output: 'pretty',
-		logLevel: 'verbose',
+		logLevel: 'info',
 		stackTraceLimit: 100,
 	},
 
