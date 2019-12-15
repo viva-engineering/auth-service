@@ -59,9 +59,10 @@ const loggerMiddleware = requestLogger({
 		const meta = {
 			method: req.method,
 			path: req.pathname,
-			status: res.statusCode,
+			status: finished ? res.statusCode : null,
 			duration,
 			requestId: req.requestId,
+			finished,
 			userId: null,
 			userRole: null,
 			appId: null
