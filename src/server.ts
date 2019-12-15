@@ -59,9 +59,10 @@ const loggerMiddleware = requestLogger({
 		const meta = {
 			method: req.method,
 			path: req.pathname,
-			status: res.statusCode,
+			status: finished ? res.statusCode : null,
 			duration,
 			requestId: req.requestId,
+			finished,
 			userId: null,
 			userRole: null,
 			appId: null
@@ -85,7 +86,7 @@ server.use(loggerMiddleware);
 
 if (config.logging.logLevel === 'silly') {
 	server.use(({ req, res }) => {
-		logger.silly('New incomming request starting', {
+		logger.info('New incomming request starting', {
 			method: req.method,
 			path: req.url,
 			requestId: req.requestId
