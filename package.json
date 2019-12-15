@@ -1,0 +1,44 @@
+{
+  "name": "@viva-eng/auth-service",
+  "version": "",
+  "description": "",
+  "private": true,
+  "main": "build/index.js",
+  "scripts": {
+    "start": "node ./build/start.js",
+    "clean": "rimraf ./build",
+    "build": "tsc --build tsconfig.json"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/viva-eng/auth-service.git"
+  },
+  "keywords": [],
+  "author": "James Brumond <james@jbrumond.me> (http://www.jbrumond.me)",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/viva/auth-service/issues"
+  },
+  "dependencies": {
+    "@celeri/body-parser": "^2.1.0",
+    "@celeri/caching": "^1.0.0",
+    "@celeri/http-error": "^2.0.1",
+    "@celeri/http-server": "^2.1.0",
+    "@celeri/query-parser": "^2.1.0",
+    "@celeri/request-logger": "^2.1.0",
+    "@viva-eng/database": "^2.0.2",
+    "@viva-eng/logger": "^1.0.11",
+    "@viva-eng/payload-validator": "^1.0.4",
+    "argon2": "^0.21.0",
+    "colors": "^1.4.0",
+    "mysql": "^2.16.0"
+  },
+  "devDependencies": {
+    "@types/node": "^11.11.4",
+    "@typescript-eslint/eslint-plugin": "^1.13.0",
+    "@typescript-eslint/parser": "^1.13.0",
+    "eslint": "^6.1.0",
+    "rimraf": "^2.6.3",
+    "typescript": "^3.7.0"
+  }
+}
