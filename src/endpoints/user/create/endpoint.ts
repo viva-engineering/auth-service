@@ -5,7 +5,7 @@ import { validateBody, Req } from './params';
 import { createRegistration } from './service';
 
 server
-	.post<void, Req>('/registration')
+	.post<void, Req>('/user')
 	.use(bodyParser({ maxSize: '1kb' }))
 	.use(validateBody)
 	.use(async ({ req, res }) => {

@@ -46,7 +46,7 @@ export const config: Config = {
 	logging: {
 		colors: true,
 		output: 'pretty',
-		logLevel: 'verbose',
+		logLevel: 'info',
 		stackTraceLimit: 100,
 	},
 

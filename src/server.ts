@@ -84,15 +84,15 @@ server.use(loggerMiddleware);
 
 // If the log level is turned all the way up, log when new requests start, as well
 
-// if (config.logging.logLevel === 'silly') {
+if (config.logging.logLevel === 'silly') {
 	server.use(({ req, res }) => {
-		logger.info('New incomming request starting', {
+		logger.silly('New incomming request starting', {
 			method: req.method,
 			path: req.url,
 			requestId: req.requestId
 		});
 	});
-// }
+}
 
 
 
