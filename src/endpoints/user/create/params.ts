@@ -9,11 +9,13 @@ export interface Req {
 }
 
 export interface Body {
-	email: string;
+	username: string;
+	password: string;
 }
 
 const validate = schemaValidator<Body>({
-	email: new EmailField({ required: true })
+	username: new StringField({ required: true, minLength: 1, maxLength: 80 }),
+	password: new StringField({ required: true, minLength: 8, maxLength: 160 })
 });
 
 /**
@@ -23,7 +25,8 @@ export const validateBody = ({ req, res }: MiddlewareInput<void, Req>) => {
 	if (! req.body) {
 		throw new HttpError(400, 'Request payload is required', {
 			expected: {
-				email: 'string'
+				username: 'string',
+				password: 'string'
 			}
 		});
 	}

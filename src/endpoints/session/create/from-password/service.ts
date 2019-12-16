@@ -19,7 +19,7 @@ enum ErrorCodes {
 	UnexpectedError = 'UNEXPECTED_ERROR'
 }
 
-export const authenticateWithPassword = async (email: string, password: string) => {
+export const authenticateWithPassword = async (username: string, password: string) => {
 	const connection = await db.startTransaction(TransactionType.ReadWrite);
 
 	let commit = async () => {
@@ -30,7 +30,7 @@ export const authenticateWithPassword = async (email: string, password: string) 
 	};
 
 	try {
-		const credentialRecords = await db.runQuery(connection, getPasswordCredentials, { email });
+		const credentialRecords = await db.runQuery(connection, getPasswordCredentials, { username });
 
 		if (! credentialRecords.results.length) {
 			throw new HttpError(401, 'Authentication failed', {

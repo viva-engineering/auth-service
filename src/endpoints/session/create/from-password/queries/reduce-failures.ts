@@ -1,27 +1,25 @@
 
 import { format } from 'mysql2';
-import { WriteQuery } from '@viva-eng/database';
+import { PreparedWriteQuery } from '@viva-eng/database';
 
 export interface ReduceFailuresParams {
 	credentialId: string;
 }
 
-const queryTemplate = `
-	update credential
-	set recent_failures = floor(recent_failures / 2)
-	where id = ?
-`;
-
-export const reduceFailures = new WriteQuery<ReduceFailuresParams>({
+export const reduceFailures = new PreparedWriteQuery<ReduceFailuresParams>({
 	description: 'update credential set recent_failures = floor(recent_failures / 2) where id = ?',
+	prepared: `
+		update credential
+		set recent_failures = floor(recent_failures / 2)
+		where id = ?
+	`,
 
-	maxRetries: 2,
-
-	isRetryable() {
-		return false;
+	prepareParams(params: ReduceFailuresParams) {
+		return [ params.credentialId ];
 	},
 
-	compile(params: ReduceFailuresParams) {
-		return format(queryTemplate, [ params.credentialId ]);
+	maxRetries: 2,
+	isRetryable() {
+		return false;
 	}
 });

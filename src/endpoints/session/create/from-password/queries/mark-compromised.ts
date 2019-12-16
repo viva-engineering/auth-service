@@ -1,27 +1,25 @@
 
 import { format } from 'mysql2';
-import { WriteQuery } from '@viva-eng/database';
+import { PreparedWriteQuery } from '@viva-eng/database';
 
 export interface MarkCompromisedParams {
 	credentialId: string;
 }
 
-const queryTemplate = `
-	update credential
-	set compromised = 1
-	where id = ?
-`;
-
-export const markCompromised = new WriteQuery<MarkCompromisedParams>({
+export const markCompromised = new PreparedWriteQuery<MarkCompromisedParams>({
 	description: 'update credential set compromised = 1 where id = ?',
+	prepared: `
+		update credential
+		set compromised = 1
+		where id = ?
+	`,
 
-	maxRetries: 2,
-
-	isRetryable() {
-		return false;
+	prepareParams(params: MarkCompromisedParams) {
+		return [ params.credentialId ];
 	},
 
-	compile(params: MarkCompromisedParams) {
-		return format(queryTemplate, [ params.credentialId ]);
+	maxRetries: 2,
+	isRetryable() {
+		return false;
 	}
 });

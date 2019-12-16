@@ -1,7 +1,7 @@
 
 import { format } from 'mysql2';
-import { WriteQuery } from '@viva-eng/database';
 import { config } from '../../../../config';
+import { PreparedWriteQuery } from '@viva-eng/database';
 
 export interface CreateSessionParams {
 	id: string;
@@ -9,28 +9,25 @@ export interface CreateSessionParams {
 	applicationId?: string;
 }
 
-const queryTemplate = `
-	insert into session
-		(id, user_id, expiration_timestamp, application_id)
-	values
-		(?, ?, date_add(now(), interval ${config.session.ttl} minute), ?)
-`;
-
-export const createSession = new WriteQuery<CreateSessionParams>({
+export const createSession = new PreparedWriteQuery<CreateSessionParams>({
 	description: 'insert into session ...',
+	prepared: `
+		insert into session
+			(id, user_id, expiration_timestamp, application_id)
+		values
+			(?, ?, date_add(now(), interval ${config.session.ttl} minute), ?)
+	`,
 
-	maxRetries: 2,
-
-	isRetryable() {
-		return false;
-	},
-
-	compile(params: CreateSessionParams) {
-		return format(queryTemplate, [
+	prepareParams(params: CreateSessionParams) {
+		return [
 			params.id,
 			params.userId,
-			params.applicationId
-		]);
+			params.applicationId || null
+		];
+	},
+
+	maxRetries: 2,
+	isRetryable() {
+		return false;
 	}
 });
-

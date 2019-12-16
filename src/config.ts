@@ -46,7 +46,7 @@ export const config: Config = {
 	logging: {
 		colors: true,
 		output: 'pretty',
-		logLevel: 'info',
+		logLevel: 'verbose',
 		stackTraceLimit: 100,
 	},
 
@@ -83,7 +83,7 @@ export const config: Config = {
 	},
 
 	refTables: {
-		refreshInterval: 1000 * 60 * 15
+		refreshInterval: 1000 * 60 * 60 * 24
 	},
 
 	session: {

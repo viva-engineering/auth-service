@@ -10,7 +10,7 @@ server
 	.use(bodyParser({ maxSize: '1kb' }))
 	.use(validateBody)
 	.use(async ({ req, res }) => {
-		const token = await authenticateWithPassword(req.body.email, req.body.password);
+		const token = await authenticateWithPassword(req.body.username, req.body.password);
 		const payload = JSON.stringify({ token, ttl: config.session.ttl * 60 });
 
 		res.writeHead(201, { 'content-type': 'application/json' });

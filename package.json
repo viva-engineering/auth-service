@@ -6,7 +6,7 @@
   "main": "build/index.js",
   "scripts": {
     "start": "node ./build/start.js",
-    "clean": "rimraf ./build",
+    "clean": "rimraf ./build tsconfig.tsbuildinfo",
     "build": "tsc --build tsconfig.json"
   },
   "repository": {

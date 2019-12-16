@@ -2,11 +2,11 @@
 import { format } from 'mysql2';
 import { PreparedWriteQuery } from '@viva-eng/database';
 
-export interface IncreaseFailuresParams {
+export interface RecordFailureParams {
 	credentialId: string;
 }
 
-export const increaseFailures = new PreparedWriteQuery<IncreaseFailuresParams>({
+export const recordFailure = new PreparedWriteQuery<RecordFailureParams>({
 	description: 'update credential set recent_failures = recent_failures + 1 where id = ?',
 	prepared: `
 		update credential
@@ -14,7 +14,7 @@ export const increaseFailures = new PreparedWriteQuery<IncreaseFailuresParams>({
 		where id = ?
 	`,
 
-	prepareParams(params: IncreaseFailuresParams) {
+	prepareParams(params: RecordFailureParams) {
 		return [ params.credentialId ];
 	},
 

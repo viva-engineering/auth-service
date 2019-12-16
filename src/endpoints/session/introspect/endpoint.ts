@@ -6,17 +6,17 @@ import { authenticate } from '../../../middlewares/authenticate';
 
 server
 	.get<void, {}>('/session/introspect')
-	.use(authenticate({ required: true, allowNoEmailVerification: true, allowNoPassword: true, allowExpiredPassword: true }))
+	.use(authenticate({ required: true, allowExpiredPassword: true }))
 	.use(async ({ req, res }) => {
 		const payload = JSON.stringify({
 			userId: req.user.userId,
+			userName: req.user.userName,
 			userCode: req.user.userCode,
 			userRole: req.user.userRole,
 			email: req.user.email,
 			preferredLanguage: req.user.preferredLanguage,
 			applicationId: req.user.applicationId,
 			token: req.user.token,
-			hasPassword: req.user.hasPassword,
 			passwordExpired: req.user.passwordExpired
 		});
 

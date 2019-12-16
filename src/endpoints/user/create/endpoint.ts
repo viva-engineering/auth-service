@@ -9,13 +9,8 @@ server
 	.use(bodyParser({ maxSize: '1kb' }))
 	.use(validateBody)
 	.use(async ({ req, res }) => {
-		const result = await createRegistration(req.body.email);
-		const payload = JSON.stringify({
-			requestId: result.requestId,
-			verificationKey_REMOVE_ME: result.verificationKey
-		});
+		await createRegistration(req.body.username, req.body.password);
 
 		res.writeHead(201, { 'content-type': 'application/json' });
-		res.write(payload);
 		res.end();
 	});
