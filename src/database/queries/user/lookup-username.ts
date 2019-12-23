@@ -12,6 +12,15 @@ export interface LookupUsernameRecord {
 	username: string;
 }
 
+/**
+ * Query that looks for the existence of a given username in the database
+ *
+ *     select
+ *       user.id as id,
+ *       user.username as username
+ *     from user user
+ *     where user.username = ?
+ */
 export const lookupUsername = new PreparedSelectQuery<LookupUsernameParams, LookupUsernameRecord>({
 	description: 'select ... from user where username = ?',
 	prepared: `

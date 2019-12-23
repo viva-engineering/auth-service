@@ -6,6 +6,13 @@ export interface DeleteSessionParams {
 	token: string;
 }
 
+/**
+ * Query that deletes a session record from the database
+ *
+ *     delete session
+ *     from session
+ *     where id = ?
+ */
 export const deleteSession = new PreparedWriteQuery<DeleteSessionParams>({
 	description: 'delete session from session where id = ?',
 	prepared: `

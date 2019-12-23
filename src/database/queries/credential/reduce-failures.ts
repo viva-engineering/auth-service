@@ -6,6 +6,13 @@ export interface ReduceFailuresParams {
 	credentialId: string;
 }
 
+/**
+ * Query that reduces the recent failures count on a credential record
+ *
+ *     update credential
+ *     set recent_failures = floor(recent_failures / 2)
+ *     where id = ?
+ */
 export const reduceFailures = new PreparedWriteQuery<ReduceFailuresParams>({
 	description: 'update credential set recent_failures = floor(recent_failures / 2) where id = ?',
 	prepared: `

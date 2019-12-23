@@ -10,6 +10,14 @@ export interface CreateApplicationParams {
 	ownerId: string;
 }
 
+/**
+ * Query that creates a new application record in the database
+ *
+ *     insert into application
+ *       (id, name, secret_key_digest, owner_user_id)
+ *     values
+ *       (?, ?, ?, ?)
+ */
 export const createApplication = new PreparedWriteQuery<CreateApplicationParams>({
 	description: 'insert into application ...',
 	prepared: `

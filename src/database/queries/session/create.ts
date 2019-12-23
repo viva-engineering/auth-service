@@ -9,6 +9,14 @@ export interface CreateSessionParams {
 	applicationId?: string;
 }
 
+/**
+ * Query that creates a new session record
+ *
+ *     insert into session
+ *       (id, user_id, expiration_timestamp, application_id)
+ *     values
+ *       (?, ?, date_add(now(), interval ? minute), ?)
+ */
 export const createSession = new PreparedWriteQuery<CreateSessionParams>({
 	description: 'insert into session ...',
 	prepared: `

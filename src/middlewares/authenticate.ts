@@ -5,6 +5,7 @@ import { MiddlewareFunction } from '@celeri/middleware-pipeline';
 import { HttpError } from '@celeri/http-error';
 import { UserRole, CredentialType } from '../reference-data';
 import { introspectSession, IntrospectSessionRecord } from '../database/queries/session/introspect';
+import { deleteSession } from '../database/queries/session/destroy';
 
 export interface AuthenticatedUser {
 	userId: string;
@@ -94,7 +95,7 @@ export const authenticate = (params: AuthenticateParams = { }) : MiddlewareFunct
 		const session = sessions.results[0];
 
 		if (session.is_expired === Bit.True) {
-			// TODO: Delete expired session record
+			await db.query(deleteSession, { token });
 
 			throw new HttpError(401, 'Invalid authentication token provided', {
 				code: ErrorCodes.InvalidToken

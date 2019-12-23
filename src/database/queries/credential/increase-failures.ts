@@ -6,6 +6,13 @@ export interface IncreaseFailuresParams {
 	credentialId: string;
 }
 
+/**
+ * Query that increments the recent failures count on a credential record
+ *
+ *     update credential
+ *     set recent_failures = recent_failures + 1
+ *     where id = ?
+ */
 export const increaseFailures = new PreparedWriteQuery<IncreaseFailuresParams>({
 	description: 'update credential set recent_failures = recent_failures + 1 where id = ?',
 	prepared: `

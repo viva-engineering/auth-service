@@ -6,6 +6,13 @@ export interface MarkCompromisedParams {
 	credentialId: string;
 }
 
+/**
+ * Query that marks a credential record as compromised
+ *
+ *     update credential
+ *     set compromised = 1
+ *     where id = ?
+ */
 export const markCompromised = new PreparedWriteQuery<MarkCompromisedParams>({
 	description: 'update credential set compromised = 1 where id = ?',
 	prepared: `

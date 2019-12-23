@@ -7,6 +7,14 @@ export interface CreateUserParams {
 	userCode: string;
 }
 
+/**
+ * Query that creates a new user record
+ *
+ *     insert into user
+ *       (username, user_code)
+ *     values
+ *       (?, ?)
+ */
 export const createUser = new PreparedWriteQuery<CreateUserParams>({
 	description: 'insert into user ...',
 	prepared: `

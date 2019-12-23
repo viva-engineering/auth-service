@@ -11,7 +11,9 @@ export type LoadReferenceDataQuery<T extends string> = SelectQuery<void, Referen
 
 /**
  * Creates a new `SelectQuery` object that loads a full reference data table
- * and returns its contents
+ * and returns its contents.
+ *
+ *     select id, description from ??
  *
  * @param tableName The name of the reference data table to be loaded
  */

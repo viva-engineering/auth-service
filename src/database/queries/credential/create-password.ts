@@ -9,6 +9,14 @@ export interface CreateCredentialParams {
 	digest: string;
 }
 
+/**
+ * Query that creates a new password credential record in the database
+ *
+ *     insert into credential
+ *       (user_id, credential_type_id, key_digest, expiration_timestamp)
+ *     values
+ *       (?, ?, ?, date_add(now(), interval ? day))
+ */
 export const createCredential = new PreparedWriteQuery<CreateCredentialParams>({
 	description: 'insert into credential ...',
 	prepared: `
