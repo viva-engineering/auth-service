@@ -1,6 +1,6 @@
 
 import { format } from 'mysql2';
-import { config } from '../../../../config';
+import { config } from '../../../config';
 import { PreparedWriteQuery } from '@viva-eng/database';
 
 export interface CreateSessionParams {

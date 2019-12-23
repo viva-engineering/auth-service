@@ -1,8 +1,8 @@
 
 import { format } from 'mysql2';
 import { PreparedWriteQuery } from '@viva-eng/database';
-import { CredentialType, credentialTypes } from '../../../../reference-data';
-import { config } from '../../../../config';
+import { CredentialType, credentialTypes } from '../../../reference-data';
+import { config } from '../../../config';
 
 export interface CreateCredentialParams {
 	userId: string;

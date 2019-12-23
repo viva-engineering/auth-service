@@ -5,8 +5,10 @@ const endpoints: string[] = [
 	// './session/create/from-email/endpoint',
 	'./session/create/from-password/endpoint',
 	'./session/create/from-session/endpoint',
+	'./session/destroy/endpoint',
 	'./session/introspect/endpoint',
-	// './credential/password/create/endpoint'
+	// './credential/password/create/endpoint',
+	'./application/create/endpoint',
 ];
 
 export const loadEndpoints = () => {

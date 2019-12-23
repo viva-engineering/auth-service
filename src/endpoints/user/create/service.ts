@@ -2,9 +2,9 @@
 import { db } from '../../../database';
 import { PoolConnection } from 'mysql2';
 import { TransactionType } from '@viva-eng/database';
-import { lookupUsername } from './queries/lookup-username';
-import { createUser } from './queries/create-user';
-import { createCredential } from './queries/create-credential';
+import { createUser } from '../../../database/queries/user/create';
+import { lookupUsername } from '../../../database/queries/user/lookup-username';
+import { createCredential } from '../../../database/queries/credential/create-password';
 import { HttpError } from '@celeri/http-error';
 import { logger } from '../../../logger';
 import { hash } from '../../../utils/hasher';

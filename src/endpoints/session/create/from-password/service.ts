@@ -3,11 +3,11 @@ import { db } from '../../../../database';
 import { logger } from '../../../../logger';
 import { verify } from '../../../../utils/hasher';
 import { generateSessionKey } from '../../../../utils/random-keys';
-import { getPasswordCredentials } from './queries/get-password-credentials';
-import { increaseFailures } from './queries/increase-failures';
-import { markCompromised } from './queries/mark-compromised';
-import { reduceFailures } from './queries/reduce-failures';
-import { createSession } from '../queries/create-session';
+import { createSession } from '../../../../database/queries/session/create';
+import { reduceFailures } from '../../../../database/queries/credential/reduce-failures';
+import { markCompromised } from '../../../../database/queries/credential/mark-compromised';
+import { increaseFailures } from '../../../../database/queries/credential/increase-failures';
+import { getPasswordCredentials } from '../../../../database/queries/credential/get-password';
 import { TransactionType } from '@viva-eng/database';
 import { HttpError } from '@celeri/http-error';
 

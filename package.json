@@ -26,7 +26,7 @@
     "@celeri/http-server": "^2.1.0",
     "@celeri/query-parser": "^2.1.0",
     "@celeri/request-logger": "^2.1.0",
-    "@viva-eng/database": "3.0.0-alpha.2",
+    "@viva-eng/database": "^3.0.0",
     "@viva-eng/logger": "^1.0.11",
     "@viva-eng/payload-validator": "^1.0.4",
     "argon2": "^0.21.0",

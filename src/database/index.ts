@@ -1,7 +1,7 @@
 
-import { config } from './config';
-import { logger } from './logger';
-import { shutdown } from './utils/shutdown';
+import { config } from '../config';
+import { logger } from '../logger';
+import { shutdown } from '../utils/shutdown';
 import { DatabasePool } from '@viva-eng/database';
 
 logger.verbose('Initializing database pool', {

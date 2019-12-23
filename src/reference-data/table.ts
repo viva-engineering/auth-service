@@ -1,9 +1,8 @@
 
-import { format } from 'mysql2';
 import { db } from '../database';
 import { config } from '../config';
 import { logger } from '../logger';
-import { SelectQuery } from '@viva-eng/database';
+import { createLoadReferenceDataQuery, LoadReferenceDataQuery } from '../database/queries/load-reference-data';
 
 export type ReferenceTableById<T extends string> = {
 	[id: number]: T;
@@ -13,30 +12,16 @@ export type ReferenceTableByDescription<T extends string> = {
 	[description in T]?: number;
 }
 
-interface ReferenceTableRecord<T extends string> {
-	id: number;
-	description: T;
-}
-
 export class ReferenceTable<T extends string> {
 	public readonly loaded: Promise<void>;
 
 	private _byId: ReferenceTableById<T>;
 	private _byDescription: ReferenceTableByDescription<T>;
 
-	private readonly getQuery: SelectQuery<void, ReferenceTableRecord<T>>;
+	private readonly getQuery: LoadReferenceDataQuery<T>;
 
 	constructor(public readonly tableName: string) {
-		this.getQuery = new SelectQuery({
-			description: `select id, description from ${tableName}`,
-			maxRetries: 5,
-			isRetryable() {
-				return true;
-			},
-			compile() {
-				return format('select id, description from ??', [ tableName ]);
-			}
-		});
+		this.getQuery = createLoadReferenceDataQuery(tableName);
 
 		this.loaded = new Promise((resolve, reject) => {
 			this.refresh().then(resolve, reject);

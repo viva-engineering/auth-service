@@ -1,11 +1,10 @@
 
-import { format } from 'mysql2';
 import { db, Bit } from '../database';
-import { PreparedSelectQuery } from '@viva-eng/database';
 import { MiddlewareInput, Request } from '@celeri/http-server';
 import { MiddlewareFunction } from '@celeri/middleware-pipeline';
 import { HttpError } from '@celeri/http-error';
-import { UserRole, CredentialType, credentialTypes } from '../reference-data';
+import { UserRole, CredentialType } from '../reference-data';
+import { introspectSession, IntrospectSessionRecord } from '../database/queries/session/introspect';
 
 export interface AuthenticatedUser {
 	userId: string;
@@ -32,23 +31,6 @@ interface AuthenticateParams {
 	requireRole?: UserRole | UserRole[];
 }
 
-interface GetSessionParams {
-	token: string;
-}
-
-interface GetSessionRecord {
-	user_id: string;
-	username: string;
-	user_code: string;
-	email: string;
-	email_verified: Bit
-	preferred_language: string;
-	is_expired: Bit;
-	application_id: string;
-	user_role: UserRole;
-	password_expired: Bit;
-}
-
 enum ErrorCodes {
 	NoToken = 'NO_TOKEN_PROVIDED',
 	MultipleTokens = 'MULTIPLE_TOKENS_PROVIDED',
@@ -72,7 +54,7 @@ export const authenticate = (params: AuthenticateParams = { }) : MiddlewareFunct
 		: null;
 
 	const validateRole = params.requireRole
-		? (user: GetSessionRecord) => roleSet.has(user.user_role)
+		? (user: IntrospectSessionRecord) => roleSet.has(user.user_role)
 		: () => true;
 
 	return async ({ req, res }) => {
@@ -101,7 +83,7 @@ export const authenticate = (params: AuthenticateParams = { }) : MiddlewareFunct
 		}
 
 		const token = tokenHeader.slice(7);
-		const sessions = await db.query(getSession, { token });
+		const sessions = await db.query(introspectSession, { token });
 
 		if (! sessions.results.length) {
 			throw new HttpError(401, 'Invalid authentication token provided', {
@@ -146,45 +128,7 @@ export const authenticate = (params: AuthenticateParams = { }) : MiddlewareFunct
 			preferredLanguage: session.preferred_language,
 			applicationId: session.application_id,
 			token: token,
-			passwordExpired: Boolean(session.password_expired)
+			passwordExpired: session.password_expired === Bit.True
 		};
 	};
 };
-
-export const getSession = new PreparedSelectQuery<GetSessionParams, GetSessionRecord>({
-	description: 'select ... from session, user, credential where id = ?',
-	prepared: `
-		select
-			user.id as user_id,
-			user.username as username,
-			user.email as email,
-			user.email_verified as email_verified,
-			user.user_code as user_code,
-			user.preferred_language as preferred_language,
-			sess.expiration_timestamp < now() as is_expired,
-			sess.application_id as application_id,
-			role.description as user_role,
-			cred.expiration_timestamp < now() as password_expired
-		from session sess
-		left outer join user user
-			on user.id = sess.user_id
-		left outer join user_role role
-			on role.id = user.user_role_id
-		left outer join credential cred
-			on cred.user_id = user.id
-			and cred.credential_type_id = ?
-		where sess.id = ?
-	`,
-
-	async prepareParams(params: GetSessionParams) {
-		return [
-			credentialTypes.byDescription[CredentialType.Password],
-			params.token
-		];
-	},
-
-	maxRetries: 2,
-	isRetryable() {
-		return false;
-	}
-});

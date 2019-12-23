@@ -1,6 +1,6 @@
 
 import { format } from 'mysql2';
-import { Bit } from '../../../../database';
+import { Bit } from '../../index';
 import { PreparedSelectQuery } from '@viva-eng/database';
 
 export interface LookupUsernameParams {

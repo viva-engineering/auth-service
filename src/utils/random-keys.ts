@@ -39,7 +39,14 @@ export const generateUserCode = () : Promise<string> => {
  * Generates a random application ID
  */
 export const generateApplicationId = () : Promise<string> => {
-	return randomString(30, applicationIdCharset);
+	return randomString(20, applicationIdCharset);
+};
+
+/**
+ * Generates a random application secret key
+ */
+export const generateApplicationSecretKey = () : Promise<string> => {
+	return randomString(40, applicationIdCharset);
 };
 
 /**

@@ -1,8 +1,8 @@
 
 import { format } from 'mysql2';
-import { db, Bit } from '../../../../../database';
+import { db, Bit } from '../../index';
 import { PreparedSelectQuery } from '@viva-eng/database';
-import { CredentialType, credentialTypes } from '../../../../../reference-data';
+import { CredentialType, credentialTypes } from '../../../reference-data';
 
 export interface GetPasswordCredentialsParams {
 	username: string;

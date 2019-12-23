@@ -1,7 +1,7 @@
 
 import { db } from '../../../../database';
 import { logger } from '../../../../logger';
-import { createSession } from '../queries/create-session';
+import { createSession } from '../../../../database/queries/session/create';
 import { AuthenticatedUser } from '../../../../middlewares/authenticate';
 import { generateSessionKey } from '../../../../utils/random-keys';
 import { HttpError } from '@celeri/http-error';
