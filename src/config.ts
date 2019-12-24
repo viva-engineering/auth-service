@@ -29,6 +29,9 @@ export interface Config {
 	session: {
 		/** Session TTL in minutes */
 		ttl: number;
+
+		/** Elevated session TTL in minutes */
+		ttlElevated: number;
 	};
 
 	password: {
@@ -87,7 +90,8 @@ export const config: Config = {
 	},
 
 	session: {
-		ttl: 30
+		ttl: 30,
+		ttlElevated: 3
 	},
 
 	password: {

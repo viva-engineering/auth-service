@@ -1,5 +1,4 @@
 
-import { Bit } from '../../index';
 import { PreparedSelectQuery } from '@viva-eng/database';
 import { UserRole, CredentialType, credentialTypes } from '../../../reference-data';
 
@@ -11,13 +10,16 @@ export interface IntrospectSessionRecord {
 	user_id: string;
 	username: string;
 	user_code: string;
+	display_name: string;
 	email: string;
-	email_verified: Bit
+	email_verified: 0 | 1
 	preferred_language: string;
-	is_expired: Bit;
+	is_elevated: 0 | 1;
+	session_ttl: string;
 	application_id: string;
 	user_role: UserRole;
-	password_expired: Bit;
+	password_ttl: string;
+	app_cred_ttl?: string;
 }
 
 /**
@@ -26,14 +28,17 @@ export interface IntrospectSessionRecord {
  *     select
  *       user.id as user_id,
  *       user.username as username,
+ *       user.display_name as display_name,
  *       user.email as email,
  *       user.email_verified as email_verified,
  *       user.user_code as user_code,
  *       user.preferred_language as preferred_language,
- *       sess.expiration_timestamp < now() as is_expired,
+ *       sess.is_elevated as is_elevated,
+ *       timestampdiff(second, sess.expiration_timestamp, now()) as session_ttl,
  *       sess.application_id as application_id,
  *       role.description as user_role,
- *       cred.expiration_timestamp < now() as password_expired
+ *       timestampdiff(second, cred.expiration_timestamp, now()) password_ttl,
+ *       timestampdiff(second, app_cred.expiration_timestamp, now()) app_cred_tll
  *     from session sess
  *     left outer join user user
  *       on user.id = sess.user_id
@@ -50,14 +55,17 @@ export const introspectSession = new PreparedSelectQuery<IntrospectSessionParams
 		select
 			user.id as user_id,
 			user.username as username,
+			user.display_name as display_name,
 			user.email as email,
 			user.email_verified as email_verified,
 			user.user_code as user_code,
 			user.preferred_language as preferred_language,
-			sess.expiration_timestamp < now() as is_expired,
+			sess.is_elevated as is_elevated,
+			timestampdiff(second, now(), sess.expiration_timestamp) as session_ttl,
 			sess.application_id as application_id,
 			role.description as user_role,
-			cred.expiration_timestamp < now() as password_expired
+			timestampdiff(second, now(), cred.expiration_timestamp) password_ttl,
+			timestampdiff(second, now(), app_cred.expiration_timestamp) app_cred_tll
 		from session sess
 		left outer join user user
 			on user.id = sess.user_id
@@ -66,6 +74,9 @@ export const introspectSession = new PreparedSelectQuery<IntrospectSessionParams
 		left outer join credential cred
 			on cred.user_id = user.id
 			and cred.credential_type_id = ?
+		left outer join credential app_cred
+			on app_cred.application_id = sess.application_id
+			and app_cred.user_id = user.id
 		where sess.id = ?
 	`,
 

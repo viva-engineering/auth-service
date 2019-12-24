@@ -8,7 +8,7 @@ import { createCredential } from '../../../database/queries/credential/create-pa
 import { HttpError } from '@celeri/http-error';
 import { logger } from '../../../logger';
 import { hash } from '../../../utils/hasher';
-import { generateUserCode, generateVerificationKey, generateCredentialRequestId } from '../../../utils/random-keys';
+import { generateUserCode } from '../../../utils/random-keys';
 
 enum ErrorCodes {
 	UnexpectedError = 'UNEXPECTED_ERROR',

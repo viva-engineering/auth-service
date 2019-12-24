@@ -36,7 +36,7 @@ export interface GetPasswordCredentialsRecord {
  *       and cred.credential_type_id = ?
  */
 export const getPasswordCredentials = new PreparedSelectQuery<GetPasswordCredentialsParams, GetPasswordCredentialsRecord>({
-	description: 'select ... from user, credential, credential_type where username = ?',
+	description: 'select ... from user, credential where username = ?',
 	prepared: `
 		select
 			user.id as user_id,

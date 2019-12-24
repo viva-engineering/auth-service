@@ -7,7 +7,8 @@ const endpoints: string[] = [
 	'./session/create/from-session/endpoint',
 	'./session/destroy/endpoint',
 	'./session/introspect/endpoint',
-	// './credential/password/create/endpoint',
+	'./credential/application/create/endpoint',
+	'./credential/password/update/endpoint',
 	'./application/create/endpoint',
 ];
 

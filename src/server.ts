@@ -46,7 +46,7 @@ server.server.listen(config.http.port, config.http.address, () => {
 
 
 
-// Generate request ID
+// Generate request IDs
 
 server.use(requestIdMiddleware);
 
@@ -62,6 +62,7 @@ const loggerMiddleware = requestLogger({
 			status: finished ? res.statusCode : null,
 			duration,
 			requestId: req.requestId,
+			requestFlowId: req.requestFlowId,
 			finished,
 			userId: null,
 			userRole: null,
@@ -89,7 +90,8 @@ if (config.logging.logLevel === 'silly') {
 		logger.silly('New incomming request starting', {
 			method: req.method,
 			path: req.url,
-			requestId: req.requestId
+			requestId: req.requestId,
+			requestFlowId: req.requestFlowId
 		});
 	});
 }

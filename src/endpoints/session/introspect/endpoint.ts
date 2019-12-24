@@ -15,9 +15,12 @@ server
 			userRole: req.user.userRole,
 			email: req.user.email,
 			preferredLanguage: req.user.preferredLanguage,
+			isElevated: req.user.isElevated,
 			applicationId: req.user.applicationId,
 			token: req.user.token,
-			passwordExpired: req.user.passwordExpired
+			sessionTTL: req.user.ttl.session,
+			passwordTTL: req.user.ttl.password,
+			appCredentialTTL: req.user.ttl.appCredential
 		});
 
 		res.writeHead(200, { 'content-type': 'application/json' });

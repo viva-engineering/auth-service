@@ -4,10 +4,12 @@ import { logger } from '../../../../logger';
 import { verify } from '../../../../utils/hasher';
 import { generateSessionKey } from '../../../../utils/random-keys';
 import { createSession } from '../../../../database/queries/session/create';
+import { createElevatedSession } from '../../../../database/queries/session/create-elevated';
 import { reduceFailures } from '../../../../database/queries/credential/reduce-failures';
 import { markCompromised } from '../../../../database/queries/credential/mark-compromised';
 import { increaseFailures } from '../../../../database/queries/credential/increase-failures';
-import { getPasswordCredentials } from '../../../../database/queries/credential/get-password';
+import { verifyPasswordByUsername } from '../../../../utils/verify-password';
+import { getPasswordCredentials } from '../../../../database/queries/credential/get-password-by-username';
 import { TransactionType } from '@viva-eng/database';
 import { HttpError } from '@celeri/http-error';
 
@@ -19,7 +21,7 @@ enum ErrorCodes {
 	UnexpectedError = 'UNEXPECTED_ERROR'
 }
 
-export const authenticateWithPassword = async (username: string, password: string) => {
+export const authenticateWithPassword = async (username: string, password: string, elevated: boolean) => {
 	const connection = await db.startTransaction(TransactionType.ReadWrite);
 
 	let commit = async () => {
@@ -72,8 +74,9 @@ export const authenticateWithPassword = async (username: string, password: strin
 		}
 
 		const token = await generateSessionKey();
+		const query = elevated ? createElevatedSession : createSession;
 
-		await db.runQuery(connection, createSession, {
+		await db.runQuery(connection, query, {
 			id: token,
 			userId: credential.user_id
 		});

@@ -12,11 +12,17 @@ export interface AuthenticatedUser {
 	userName: string;
 	userCode: string;
 	userRole: UserRole;
+	displayName: string;
 	email: string;
 	preferredLanguage: string;
 	applicationId: string;
 	token: string;
-	passwordExpired: boolean;
+	isElevated: boolean;
+	ttl: {
+		session: number;
+		password: number;
+		appCredential?: number;
+	};
 }
 
 declare module '@celeri/http-server' {
@@ -29,6 +35,7 @@ interface AuthenticateParams {
 	required?: true;
 	allowExpiredPassword?: true;
 	rejectApplication?: true;
+	requireElevated?: true;
 	requireRole?: UserRole | UserRole[];
 }
 
@@ -40,7 +47,8 @@ enum ErrorCodes {
 	EmailNotVerified = 'EMAIL_NOT_VERIFIED',
 	PasswordExpired = 'PASSWORD_EXPIRED',
 	ApplicationNotAllowed = 'APPLICATION_NOT_ALLOWED',
-	NotAuthorized = 'NOT_AUTHORIZED'
+	NotAuthorized = 'NOT_AUTHORIZED',
+	NeedsElevated = 'NEEDS_ELEVATED_SESSION'
 }
 
 /**
@@ -94,7 +102,11 @@ export const authenticate = (params: AuthenticateParams = { }) : MiddlewareFunct
 
 		const session = sessions.results[0];
 
-		if (session.is_expired === Bit.True) {
+		const ttlSession = parseInt(session.session_ttl, 10);
+		const ttlPassword = parseInt(session.password_ttl, 10);
+		const ttlAppCred = session.app_cred_ttl ? parseInt(session.app_cred_ttl, 10) : null;
+
+		if (ttlSession <= 0) {
 			await db.query(deleteSession, { token });
 
 			throw new HttpError(401, 'Invalid authentication token provided', {
@@ -102,7 +114,7 @@ export const authenticate = (params: AuthenticateParams = { }) : MiddlewareFunct
 			});
 		}
 
-		if (! params.allowExpiredPassword && session.password_expired=== Bit.True) {
+		if (! params.allowExpiredPassword && ttlPassword <= 0) {
 			throw new HttpError(401, 'Cannot perform that action until password is updated', {
 				code: ErrorCodes.PasswordExpired
 			});
@@ -111,6 +123,12 @@ export const authenticate = (params: AuthenticateParams = { }) : MiddlewareFunct
 		if (params.rejectApplication && session.application_id) {
 			throw new HttpError(401, 'Cannot perform that action through an application', {
 				code: ErrorCodes.ApplicationNotAllowed
+			});
+		}
+
+		if (params.requireElevated && ! session.is_elevated) {
+			throw new HttpError(401, 'This action requires an elevated session', {
+				code: ErrorCodes.NeedsElevated
 			});
 		}
 
@@ -125,11 +143,17 @@ export const authenticate = (params: AuthenticateParams = { }) : MiddlewareFunct
 			userName: session.username,
 			userCode: session.user_code,
 			userRole: session.user_role,
+			displayName: session.display_name,
 			email: session.email,
+			isElevated: !! session.is_elevated,
 			preferredLanguage: session.preferred_language,
 			applicationId: session.application_id,
 			token: token,
-			passwordExpired: session.password_expired === Bit.True
+			ttl: {
+				session: ttlSession,
+				password: ttlPassword,
+				appCredential: ttlAppCred
+			}
 		};
 	};
 };
