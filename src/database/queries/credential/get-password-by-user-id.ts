@@ -1,6 +1,6 @@
 
 import { format } from 'mysql2';
-import { db, Bit } from '../../index';
+import { db } from '../../index';
 import { PreparedSelectQuery } from '@viva-eng/database';
 import { CredentialType, credentialTypes } from '../../../reference-data';
 
@@ -11,9 +11,9 @@ export interface GetPasswordCredentialsParams {
 export interface GetPasswordCredentialsRecord {
 	cred_id: string;
 	cred_digest: string;
-	cred_compromised: Bit;
+	cred_compromised: 0 | 1;
 	recent_failures: number;
-	cred_expired: Bit;
+	cred_ttl: number;
 }
 
 /**
@@ -24,7 +24,7 @@ export interface GetPasswordCredentialsRecord {
  *       cred.key_digest as cred_digest,
  *       cred.compromised as cred_compromised,
  *       cred.recent_failures as recent_failues,
- *       cred.expiration_timestamp < now() as cred_expired
+ *       timestampdiff(second, cred.expiration_timestamp, now()) as cred_ttl
  *     from credential cred
  *     where cred.user_id = ?
  *       and cred.credential_type_id = ?
@@ -37,7 +37,7 @@ export const getPasswordCredentials = new PreparedSelectQuery<GetPasswordCredent
 			cred.key_digest as cred_digest,
 			cred.compromised as cred_compromised,
 			cred.recent_failures as recent_failures,
-			cred.expiration_timestamp < now() as cred_expired
+			timestampdiff(second, cred.expiration_timestamp, now()) as cred_ttl
 		from user user
 		left outer join credential cred
 			on cred.user_id = user.id

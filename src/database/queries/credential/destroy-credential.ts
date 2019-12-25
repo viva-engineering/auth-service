@@ -2,11 +2,11 @@
 import { format } from 'mysql2';
 import { PreparedWriteQuery } from '@viva-eng/database';
 
-export interface DeleteCredentialParams {
+export interface DestroyCredentialParams {
 	credentialId: string;
 }
 
-export const deleteCredential = new PreparedWriteQuery<DeleteCredentialParams>({
+export const destroyCredential = new PreparedWriteQuery<DestroyCredentialParams>({
 	description: 'delete credential from credential where id = ?',
 	prepared: `
 		delete credential
@@ -14,7 +14,7 @@ export const deleteCredential = new PreparedWriteQuery<DeleteCredentialParams>({
 		where id = ?
 	`,
 
-	prepareParams(params: DeleteCredentialParams) {
+	prepareParams(params: DestroyCredentialParams) {
 		return [ params.credentialId ];
 	},
 

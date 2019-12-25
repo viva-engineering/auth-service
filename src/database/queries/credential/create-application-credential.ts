@@ -33,7 +33,7 @@ export const createCredential = new PreparedWriteQuery<CreateCredentialParams>({
 		return [
 			params.userId,
 			params.applicationId,
-			credentialTypes.byDescription[CredentialType.Password],
+			credentialTypes.byDescription[CredentialType.Application],
 			params.digest
 		];
 	},

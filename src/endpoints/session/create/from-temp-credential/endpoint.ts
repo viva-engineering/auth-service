@@ -2,16 +2,17 @@
 import { server } from '../../../../server';
 import { bodyParser } from '@celeri/body-parser';
 import { validateBody, Req } from './params';
-import { authenticateWithEmailCode } from './service';
+import { authenticateWithTempCredential } from './service';
 import { config } from '../../../../config';
 
 server
-	.post<void, Req>('/session/from-email')
+	.post<void, Req>('/session/from-temp-credential')
 	.use(bodyParser({ maxSize: '1kb' }))
 	.use(validateBody)
 	.use(async ({ req, res }) => {
-		const token = await authenticateWithEmailCode(req.body.requestId, req.body.verificationKey);
-		const payload = JSON.stringify({ token, ttl: config.session.ttl * 60 });
+		const token = await authenticateWithTempCredential(req.body.requestId, req.body.verificationKey, req.body.elevated);
+		const ttlMinutes = req.body.elevated ? config.session.ttlElevated : config.session.ttl;
+		const payload = JSON.stringify({ token, ttl: ttlMinutes * 60 });
 
 		res.writeHead(201, { 'content-type': 'application/json' });
 		res.write(payload);

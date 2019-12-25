@@ -18,9 +18,8 @@ export enum VisibilityScheme {
 
 export enum CredentialType {
 	Password = 'password',
-	Email = 'email',
-	Application = 'application',
-	SecurityQuestion = 'security_question'
+	TempCredential = 'temp_credential',
+	Application = 'application'
 }
 
 export const userRoles = new ReferenceTable<UserRole>('user_role');

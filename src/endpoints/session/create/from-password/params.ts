@@ -2,7 +2,7 @@
 import { HttpError } from '@celeri/http-error';
 import { MiddlewareInput } from '@celeri/http-server';
 import { schemaValidator } from '../../../../utils/validate-schema';
-import { StringField, EmailField, BooleanField } from '@viva-eng/payload-validator';
+import { StringField, BooleanField } from '@viva-eng/payload-validator';
 
 export interface Req {
 	body?: Body;
