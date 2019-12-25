@@ -10,6 +10,7 @@ import { increaseFailures } from '../../../../database/queries/credential/increa
 import { destroyCredential } from '../../../../database/queries/credential/destroy-credential';
 import { TransactionType } from '@viva-eng/database';
 import { HttpError } from '@celeri/http-error';
+import { processVerifications } from './verifications';
 
 const maxFailures = 5;
 
@@ -62,6 +63,7 @@ export const authenticateWithTempCredential = async (requestId: string, verifica
 		
 		await db.runQuery(connection, createQuery, { id: token, userId: credential.user_id });
 		await db.runQuery(connection, destroyCredential, { credentialId: credential.cred_id });
+		await processVerifications(connection, credential);
 		await commit();
 
 		return token;

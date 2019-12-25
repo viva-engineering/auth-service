@@ -22,6 +22,12 @@ export enum CredentialType {
 	Application = 'application'
 }
 
+export enum VerificationType {
+	Email = 'email',
+	Phone = 'phone'
+}
+
 export const userRoles = new ReferenceTable<UserRole>('user_role');
 export const visibilitySchemes = new ReferenceTable<VisibilityScheme>('visibility_scheme');
 export const credentialTypes = new ReferenceTable<CredentialType>('credential_type');
+export const verificationTypes = new ReferenceTable<VerificationType>('verification_type');
