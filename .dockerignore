@@ -1,0 +1,7 @@
+node_modules
+npm-debug.log
+src
+.eslintrc
+.gitignore
+tsconfig.json
+tsconfig.tsbuildinfo
