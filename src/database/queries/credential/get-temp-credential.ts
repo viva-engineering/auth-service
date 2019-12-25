@@ -27,7 +27,7 @@ export const getTempCredential = new PreparedSelectQuery<GetCredentialParams, Ge
 			timestampdiff(second, cred.expiration_timestamp, now()) as cred_ttl,
 			cred.compromised as cred_compromised,
 			cred.recent_failures as cred_recent_failures,
-			cred.user_id as user_id,
+			cred.user_id as user_id
 		from credential cred
 		where cred.credential_type_id = ?
 			and cred.request_id = ?
