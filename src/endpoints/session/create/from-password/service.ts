@@ -3,8 +3,7 @@ import { db } from '../../../../database';
 import { logger } from '../../../../logger';
 import { verify } from '../../../../utils/hasher';
 import { generateSessionKey } from '../../../../utils/random-keys';
-import { createSession } from '../../../../database/queries/session/create';
-import { createElevatedSession } from '../../../../database/queries/session/create-elevated';
+import { createSession, createElevatedSession } from '../../../../redis/session';
 import { reduceFailures } from '../../../../database/queries/credential/reduce-failures';
 import { markCompromised } from '../../../../database/queries/credential/mark-compromised';
 import { increaseFailures } from '../../../../database/queries/credential/increase-failures';
@@ -18,6 +17,7 @@ const maxFailures = 5;
 enum ErrorCodes {
 	AuthenticationFailed = 'AUTHENTICATION_FAILED',
 	CredentialLocked = 'CREDENTIAL_LOCKED_FOR_RECENT_FAILURES',
+	PasswordExpired = 'PASSWORD_EXPIRED',
 	UnexpectedError = 'UNEXPECTED_ERROR'
 }
 
@@ -73,15 +73,18 @@ export const authenticateWithPassword = async (username: string, password: strin
 			});
 		}
 
-		const token = await generateSessionKey();
-		const query = elevated ? createElevatedSession : createSession;
-
-		await db.runQuery(connection, query, {
-			id: token,
-			userId: credential.user_id
-		});
+		if (parseInt(credential.cred_ttl, 10) <= 0 && ! elevated) {
+			throw new HttpError(401, 'Password expired', {
+				code: ErrorCodes.PasswordExpired
+			});
+		}
 
 		await commit();
+
+		const token = await generateSessionKey();
+		const create = elevated ? createElevatedSession : createSession;
+
+		await create(token, credential.user_id, credential.user_role);
 
 		return token;
 	}

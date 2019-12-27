@@ -11,8 +11,10 @@ server
 	.use(validateBody)
 	.use(async ({ req, res }) => {
 		const token = await authenticateWithTempCredential(req.body.requestId, req.body.verificationKey, req.body.elevated);
-		const ttlMinutes = req.body.elevated ? config.session.ttlElevated : config.session.ttl;
-		const payload = JSON.stringify({ token, ttl: ttlMinutes * 60 });
+		const payload = JSON.stringify({
+			token,
+			ttl: req.body.elevated ? config.session.ttlElevated : config.session.ttl
+		});
 
 		res.writeHead(201, { 'content-type': 'application/json' });
 		res.write(payload);

@@ -2,7 +2,7 @@
 import { format } from 'mysql2';
 import { db } from '../../index';
 import { PreparedSelectQuery } from '@viva-eng/database';
-import { CredentialType, credentialTypes } from '../../../reference-data';
+import { CredentialType, credentialTypes, UserRole } from '../../../reference-data';
 
 export interface GetPasswordCredentialsParams {
 	username: string;
@@ -15,7 +15,8 @@ export interface GetPasswordCredentialsRecord {
 	cred_digest: string;
 	cred_compromised: 0 | 1;
 	recent_failures: number;
-	cred_ttl: number;
+	cred_ttl: string;
+	user_role: UserRole;
 }
 
 /**
@@ -28,10 +29,13 @@ export interface GetPasswordCredentialsRecord {
  *       cred.key_digest as cred_digest,
  *       cred.compromised as cred_compromised,
  *       cred.recent_failures as recent_failues,
- *       timestampdiff(second, cred.expiration_timestamp, now()) as cred_ttl
+ *       timestampdiff(second, now(), cred.expiration_timestamp) as cred_ttl,
+ *       role.description as user_role
  *     from user user
  *     left outer join credential cred
  *       on cred.user_id = user.id
+ *     left outer join user_role role
+ *       on role.id = user.user_role_id
  *     where user.username = ?
  *       and cred.credential_type_id = ?
  */
@@ -45,10 +49,13 @@ export const getPasswordCredentials = new PreparedSelectQuery<GetPasswordCredent
 			cred.key_digest as cred_digest,
 			cred.compromised as cred_compromised,
 			cred.recent_failures as recent_failures,
-			timestampdiff(second, cred.expiration_timestamp, now()) as cred_ttl
+			timestampdiff(second, now(), cred.expiration_timestamp) as cred_ttl,
+			role.description as user_role
 		from user user
 		left outer join credential cred
 			on cred.user_id = user.id
+		left outer join user_role role
+			on role.id = user.user_role_id
 		where user.username = ?
 			and cred.credential_type_id = ?
 	`,

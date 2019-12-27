@@ -1,7 +1,7 @@
 
 import { db } from '../../../../database';
 import { logger } from '../../../../logger';
-import { createSession } from '../../../../database/queries/session/create';
+import { createSession } from '../../../../redis/session';
 import { AuthenticatedUser } from '../../../../middlewares/authenticate';
 import { generateSessionKey } from '../../../../utils/random-keys';
 import { HttpError } from '@celeri/http-error';
@@ -13,11 +13,8 @@ enum ErrorCodes {
 export const authenticateWithSession = async (user: AuthenticatedUser) => {
 	try {
 		const token = await generateSessionKey();
-		const result = await db.query(createSession, {
-			id: token,
-			userId: user.userId,
-			applicationId: user.applicationId
-		});
+
+		await createSession(token, user.userId, user.userRole, user.applicationId || '');
 
 		return token;
 	}

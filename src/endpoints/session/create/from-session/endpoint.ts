@@ -7,10 +7,13 @@ import { authenticate } from '../../../../middlewares/authenticate';
 
 server
 	.post<void, {}>('/session/from-session')
-	.use(authenticate({ required: true, allowExpiredPassword: true }))
+	.use(authenticate({ required: true }))
 	.use(async ({ req, res }) => {
 		const token = await authenticateWithSession(req.user);
-		const payload = JSON.stringify({ token, ttl: config.session.ttl * 60 });
+		const payload = JSON.stringify({
+			token,
+			ttl: config.session.ttl
+		});
 
 		res.writeHead(201, { 'content-type': 'application/json' });
 		res.write(payload);

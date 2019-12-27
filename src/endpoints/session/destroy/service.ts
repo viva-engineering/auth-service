@@ -1,9 +1,6 @@
 
-import { db } from '../../../database';
-import { PoolConnection } from 'mysql2';
-import { TransactionType } from '@viva-eng/database';
 import { HttpError } from '@celeri/http-error';
-import { deleteSession } from '../../../database/queries/session/destroy';
+import { destroySession } from '../../../redis/session';
 import { logger } from '../../../logger';
 
 enum ErrorCodes {
@@ -12,7 +9,7 @@ enum ErrorCodes {
 
 export const deleteUserSession = async (token: string) => {
 	try {
-		await db.query(deleteSession, { token });
+		await destroySession(token);
 	}
 
 	catch (error) {

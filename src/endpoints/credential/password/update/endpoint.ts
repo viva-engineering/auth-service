@@ -8,7 +8,7 @@ import { authenticate } from '../../../../middlewares/authenticate';
 
 server
 	.put<void, Req>('/credential/password')
-	.use(authenticate({ required: true, allowExpiredPassword: true, requireElevated: true }))
+	.use(authenticate({ required: true, requireElevated: true }))
 	.use(bodyParser({ maxSize: '1kb' }))
 	.use(validateBody)
 	.use(async ({ req, res }) => {

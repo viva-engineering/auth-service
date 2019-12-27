@@ -3,9 +3,8 @@ import { db } from '../../../../database';
 import { logger } from '../../../../logger';
 import { generateSessionKey } from '../../../../utils/random-keys';
 import { verifyTempCredential } from '../../../../utils/temp-credential';
+import { createSession, createElevatedSession } from '../../../../redis/session';
 import { getTempCredential } from '../../../../database/queries/credential/get-temp-credential';
-import { createSession } from '../../../../database/queries/session/create';
-import { createElevatedSession } from '../../../../database/queries/session/create-elevated';
 import { increaseFailures } from '../../../../database/queries/credential/increase-failures';
 import { destroyCredential } from '../../../../database/queries/credential/destroy-credential';
 import { TransactionType } from '@viva-eng/database';
@@ -17,6 +16,7 @@ const maxFailures = 5;
 enum ErrorCodes {
 	InvalidCredentials = 'INVALID_CREDENTIALS',
 	InvalidRequestId = 'INVALID_CREDENTIAL_REQUEST_ID',
+	PasswordExpired = 'PASSWORD_EXPIRED',
 	UnexpectedError = 'UNEXPECTED_ERROR'
 }
 
@@ -59,12 +59,22 @@ export const authenticateWithTempCredential = async (requestId: string, verifica
 			});
 		}
 
-		const createQuery = elevated ? createElevatedSession : createSession;
-		
-		await db.runQuery(connection, createQuery, { id: token, userId: credential.user_id });
 		await db.runQuery(connection, destroyCredential, { credentialId: credential.cred_id });
 		await processVerifications(connection, credential);
 		await commit();
+
+		if (parseInt(credential.cred_ttl, 10) <= 0 && ! elevated) {
+			await db.runQuery(connection, destroyCredential, { credentialId: credential.cred_id });
+			await commit();
+
+			throw new HttpError(401, 'Invalid credentials', {
+				code: ErrorCodes.InvalidCredentials
+			});
+		}
+
+		const create = elevated ? createElevatedSession : createSession;
+
+		await create(token, credential.user_id, credential.user_role);
 
 		return token;
 	}

@@ -26,12 +26,16 @@
     "@celeri/http-server": "^2.1.0",
     "@celeri/query-parser": "^2.1.0",
     "@celeri/request-logger": "^2.1.0",
+    "@types/generic-pool": "^3.1.9",
+    "@types/redis": "^2.8.14",
     "@viva-eng/database": "^3.0.3",
     "@viva-eng/logger": "^2.0.0",
     "@viva-eng/payload-validator": "^1.0.5",
     "argon2": "^0.25.1",
     "colors": "^1.4.0",
-    "mysql2": "^2.0.2"
+    "generic-pool": "^3.7.1",
+    "mysql2": "^2.0.2",
+    "redis": "^2.8.0"
   },
   "devDependencies": {
     "@types/node": "^11.11.4",

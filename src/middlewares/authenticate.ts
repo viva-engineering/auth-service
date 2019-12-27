@@ -4,25 +4,15 @@ import { MiddlewareInput, Request } from '@celeri/http-server';
 import { MiddlewareFunction } from '@celeri/middleware-pipeline';
 import { HttpError } from '@celeri/http-error';
 import { UserRole, CredentialType } from '../reference-data';
-import { introspectSession, IntrospectSessionRecord } from '../database/queries/session/introspect';
-import { deleteSession } from '../database/queries/session/destroy';
+import { Session, introspectSession } from '../redis/session';
 
 export interface AuthenticatedUser {
 	userId: string;
-	userName: string;
-	userCode: string;
 	userRole: UserRole;
-	displayName: string;
-	email: string;
-	preferredLanguage: string;
 	applicationId: string;
 	token: string;
 	isElevated: boolean;
-	ttl: {
-		session: number;
-		password: number;
-		appCredential?: number;
-	};
+	ttl: number;
 }
 
 declare module '@celeri/http-server' {
@@ -33,7 +23,6 @@ declare module '@celeri/http-server' {
 
 interface AuthenticateParams {
 	required?: true;
-	allowExpiredPassword?: true;
 	rejectApplication?: true;
 	requireElevated?: true;
 	requireRole?: UserRole | UserRole[];
@@ -45,7 +34,6 @@ enum ErrorCodes {
 	NonBearerToken = 'NON_BEARER_TOKEN',
 	InvalidToken = 'INVALID_TOKEN_PROVIDED',
 	EmailNotVerified = 'EMAIL_NOT_VERIFIED',
-	PasswordExpired = 'PASSWORD_EXPIRED',
 	ApplicationNotAllowed = 'APPLICATION_NOT_ALLOWED',
 	NotAuthorized = 'NOT_AUTHORIZED',
 	NeedsElevated = 'NEEDS_ELEVATED_SESSION'
@@ -63,7 +51,7 @@ export const authenticate = (params: AuthenticateParams = { }) : MiddlewareFunct
 		: null;
 
 	const validateRole = params.requireRole
-		? (user: IntrospectSessionRecord) => roleSet.has(user.user_role)
+		? (user: Session) => roleSet.has(user.userRole)
 		: () => true;
 
 	return async ({ req, res }) => {
@@ -92,42 +80,22 @@ export const authenticate = (params: AuthenticateParams = { }) : MiddlewareFunct
 		}
 
 		const token = tokenHeader.slice(7);
-		const sessions = await db.query(introspectSession, { token });
+		const session = await introspectSession(token);
 
-		if (! sessions.results.length) {
+		if (! session) {
 			throw new HttpError(401, 'Invalid authentication token provided', {
 				code: ErrorCodes.InvalidToken
 			});
 		}
 
-		const session = sessions.results[0];
-
-		const ttlSession = parseInt(session.session_ttl, 10);
-		const ttlPassword = parseInt(session.password_ttl, 10);
-		const ttlAppCred = session.app_cred_ttl ? parseInt(session.app_cred_ttl, 10) : null;
-
-		if (ttlSession <= 0) {
-			await db.query(deleteSession, { token });
-
-			throw new HttpError(401, 'Invalid authentication token provided', {
-				code: ErrorCodes.InvalidToken
-			});
-		}
-
-		if (! params.allowExpiredPassword && ttlPassword <= 0) {
-			throw new HttpError(401, 'Cannot perform that action until password is updated', {
-				code: ErrorCodes.PasswordExpired
-			});
-		}
-
-		if (params.rejectApplication && session.application_id) {
-			throw new HttpError(401, 'Cannot perform that action through an application', {
+		if (params.rejectApplication && session.applicationId) {
+			throw new HttpError(403, 'Cannot perform that action through an application', {
 				code: ErrorCodes.ApplicationNotAllowed
 			});
 		}
 
-		if (params.requireElevated && ! session.is_elevated) {
-			throw new HttpError(401, 'This action requires an elevated session', {
+		if (params.requireElevated && ! session.isElevated) {
+			throw new HttpError(403, 'This action requires an elevated session', {
 				code: ErrorCodes.NeedsElevated
 			});
 		}
@@ -139,21 +107,12 @@ export const authenticate = (params: AuthenticateParams = { }) : MiddlewareFunct
 		}
 
 		req.user = {
-			userId: session.user_id,
-			userName: session.username,
-			userCode: session.user_code,
-			userRole: session.user_role,
-			displayName: session.display_name,
-			email: session.email,
-			isElevated: !! session.is_elevated,
-			preferredLanguage: session.preferred_language,
-			applicationId: session.application_id,
+			userId: session.userId,
+			userRole: session.userRole,
+			isElevated: session.isElevated,
+			applicationId: session.applicationId,
 			token: token,
-			ttl: {
-				session: ttlSession,
-				password: ttlPassword,
-				appCredential: ttlAppCred
-			}
+			ttl: session.ttl
 		};
 	};
 };

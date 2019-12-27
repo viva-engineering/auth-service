@@ -7,7 +7,7 @@ import { authenticate } from '../../../middlewares/authenticate';
 
 server
 	.delete<void, {}>('/session')
-	.use(authenticate({ required: true, allowExpiredPassword: true }))
+	.use(authenticate({ required: true }))
 	.use(async ({ req, res }) => {
 		await deleteUserSession(req.user.token);
 

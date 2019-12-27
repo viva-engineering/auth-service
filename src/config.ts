@@ -1,6 +1,8 @@
 
 import { PoolConfig } from 'mysql2';
 import { Options as HasherOptions, argon2id } from 'argon2';
+import { RedisDB } from './redis/pool';
+import { Options as PoolOptions } from 'generic-pool';
 
 export interface Config {
 	http: {
@@ -22,15 +24,25 @@ export interface Config {
 		replica: PoolConfig;
 	};
 
+	redis: {
+		host: string;
+		port: number;
+		password: string;
+		dbs: {
+			session: RedisDB;
+		},
+		poolOptions: PoolOptions;
+	};
+
 	refTables: {
 		refreshInterval: number;
 	};
 
 	session: {
-		/** Session TTL in minutes */
+		/** Session TTL in seconds */
 		ttl: number;
 
-		/** Elevated session TTL in minutes */
+		/** Elevated session TTL in seconds */
 		ttlElevated: number;
 	};
 
@@ -49,7 +61,7 @@ export const config: Config = {
 	logging: {
 		colors: true,
 		output: 'pretty',
-		logLevel: 'info',
+		logLevel: 'verbose',
 		stackTraceLimit: 100,
 	},
 
@@ -85,13 +97,26 @@ export const config: Config = {
 		}
 	},
 
+	redis: {
+		host: 'localhost',
+		port: 6379,
+		password: 'wERolomONOtOyuKecA2oRuweM3MA24Y8di36XEB5P63I4ic6GIl5Y3tI6eqO',
+		dbs: {
+			session: 0
+		},
+		poolOptions: {
+			min: 1,
+			max: 30
+		}
+	},
+
 	refTables: {
 		refreshInterval: 1000 * 60 * 60 * 24
 	},
 
 	session: {
-		ttl: 30,
-		ttlElevated: 3
+		ttl: 30 * 60,
+		ttlElevated: 3 * 60
 	},
 
 	password: {
