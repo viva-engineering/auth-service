@@ -15,6 +15,6 @@ server
 		const payload = JSON.stringify({ secretKey });
 
 		res.writeHead(201, { 'content-type': 'application/json' });
-		// res.write(payload);
+		res.write(payload);
 		res.end();
 	});
