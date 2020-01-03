@@ -1,5 +1,5 @@
 
-import { options } from './config-loader-options';
+import { options } from './utils/config-loader-options';
 import { loadConfiguration } from '@viva-eng/config-loader';
 
 loadConfiguration(options).then(() => {
