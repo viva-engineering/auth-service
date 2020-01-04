@@ -33,7 +33,6 @@ enum ErrorCodes {
 	MultipleTokens = 'MULTIPLE_TOKENS_PROVIDED',
 	NonBearerToken = 'NON_BEARER_TOKEN',
 	InvalidToken = 'INVALID_TOKEN_PROVIDED',
-	EmailNotVerified = 'EMAIL_NOT_VERIFIED',
 	ApplicationNotAllowed = 'APPLICATION_NOT_ALLOWED',
 	NotAuthorized = 'NOT_AUTHORIZED',
 	NeedsElevated = 'NEEDS_ELEVATED_SESSION'

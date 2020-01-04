@@ -15,7 +15,7 @@ const applicationIdCharset = charsets.alphaLower + charsets.alphaUpper + charset
 const verificationKeyCharset = charsets.alphaUpper + charsets.numeric;
 
 /**
- * Generates a random ID used to uniquely identify a particular request in log out
+ * Generates a random ID used to uniquely identify a particular request in logs
  */
 export const generateRequestId = () : Promise<string> => {
 	return randomString(10, requestIdCharset);
