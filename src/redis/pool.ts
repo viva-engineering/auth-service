@@ -6,6 +6,7 @@ import { logger } from '../logger';
 import { createPool, Factory, Pool } from 'generic-pool';
 import { createClient, ClientOpts, RedisClient, Callback } from 'redis';
 import { shutdown } from '../utils/shutdown';
+import { formatDuration } from './utils';
 
 let nextId = 1;
 const clientIds: WeakMap<RedisClient, number> = new WeakMap();
@@ -14,11 +15,28 @@ interface CommandRunner<T> {
 	(client: RedisClient, callback: Callback<T>): void;
 }
 
+export interface HealthcheckResult {
+	available: boolean,
+	url: string,
+	timeToAcquire?: string,
+	duration?: string,
+	warning?: string,
+	info?: string
+}
+
 export class RedisPool {
+	public readonly host: string;
+	public readonly port: number;
+	public readonly db: RedisDB;
+
 	protected readonly pool: Pool<RedisClient>;
 
 	constructor(db: RedisDB, options?: Partial<ClientOpts>) {
 		const { host, port } = config.redis;
+
+		this.host = host;
+		this.port = port;
+		this.db = db;
 
 		logger.verbose('Creating new redis pool', { host, port, db });
 
@@ -39,6 +57,12 @@ export class RedisPool {
 
 	public release(client: RedisClient) {
 		this.pool.release(client);
+	}
+
+	public ping<T extends string>(message?: T) {
+		return this.exec<T>((client, callback) => {
+			client.ping(message || 'ping', callback);
+		});
 	}
 
 	public set(key: string, value: string, expiration?: number) {
@@ -92,6 +116,41 @@ export class RedisPool {
 	public async close() {
 		await this.pool.drain();
 		await this.pool.clear();
+	}
+
+	public async healthcheck() {
+		const start = process.hrtime();
+		const result: HealthcheckResult = {
+			url: `redis://${this.host}:${this.port}/${this.db}`,
+			available: true
+		};
+
+		const client = await this.acquire();
+		const timeToAcquire = process.hrtime(start);
+
+		await new Promise((resolve) => {
+			client.ping((error) => {
+				const duration = process.hrtime(start);
+
+				result.duration = formatDuration(duration);
+				result.timeToAcquire = formatDuration(timeToAcquire);
+
+				if (error) {
+					result.available = false;
+					result.info = error.message;
+				}
+
+				if (duration[0] > 0 || duration[1] / 10e5 > 50) {
+					result.warning = 'Connection slower than 50ms';
+				}
+
+				resolve();
+			});
+		});
+
+		this.release(client);
+
+		return result;
 	}
 
 	private exec<T>(run: CommandRunner<T>) : Promise<T> {

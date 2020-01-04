@@ -1,7 +1,7 @@
 
 FROM node:12-alpine
 
-WORKDIR /usr/viva/auth-service
+WORKDIR /usr/viva/service
 
 # Start with just the package files so we can install dependencies
 COPY package.json package-lock.json ./
@@ -16,7 +16,7 @@ RUN apk add --no-cache g++ gcc libgcc libstdc++ linux-headers make python && \
 FROM node:12-alpine
 
 # Finally, move the actual app files
-COPY . .
+COPY build ./build
 
 EXPOSE 8080
 

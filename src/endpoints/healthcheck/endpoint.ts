@@ -1,6 +1,7 @@
 
 import { hostname } from 'os';
 import { db } from '../../database';
+import { sessionPool } from '../../redis/session';
 import { server } from '../../server';
 
 interface Healthcheck {
@@ -34,11 +35,15 @@ server
 server
 	.get('/healthcheck/full')
 	.use(async ({ req, res }) => {
-		const { master, replica } = await db.healthcheck();
+		const [ dbResult, redisResult ] = await Promise.all([
+			db.healthcheck(),
+			sessionPool.healthcheck()
+		]);
 
 		const dependencies: Dependency[] = [
-			master,
-			replica
+			dbResult.master,
+			dbResult.replica,
+			redisResult
 		];
 
 		const available = dependencies.every((dependency) => dependency.available);
@@ -48,8 +53,9 @@ server
 			status: available ? 'available' : 'dependency failure',
 			hostname: hostname(),
 			dependencies: {
-				dbMaster: master,
-				dbReplica: replica
+				dbMaster: dbResult.master,
+				dbReplica: dbResult.replica,
+				redisSessions: redisResult
 			}
 		};
 
