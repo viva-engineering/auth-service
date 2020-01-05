@@ -83,10 +83,9 @@ export const authenticateWithPassword = async (username: string, password: strin
 
 		const token = await generateSessionKey();
 		const create = elevated ? createElevatedSession : createSession;
+		const ttl = await create(token, credential.user_id, credential.user_role);
 
-		await create(token, credential.user_id, credential.user_role);
-
-		return token;
+		return { token, ttl };
 	}
 
 	catch (error) {

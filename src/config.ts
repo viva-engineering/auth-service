@@ -31,6 +31,7 @@ export interface Config {
 		password: string;
 		dbs: {
 			session: RedisDB;
+			tempCredential: RedisDB;
 		},
 		poolOptions: PoolOptions;
 	};
@@ -39,18 +40,22 @@ export interface Config {
 		refreshInterval: number;
 	};
 
-	session: {
+	ttls: {
 		/** Session TTL in seconds */
-		ttl: number;
+		session: number;
 
 		/** Elevated session TTL in seconds */
-		ttlElevated: number;
-	};
+		elevatedSession: number;
 
-	password: {
+		/** Temp credentials TTL in seconds */
+		tempCredential: number;
+
 		/** New password credential TTL in days */
-		ttl: number;
-	};
+		password: number;
+
+		/** Application credential TTL in days */
+		appCredential: number;
+	}
 }
 
 export const config: Config = {
@@ -103,7 +108,8 @@ export const config: Config = {
 		port: cast.number(process.env.redis_port),
 		password: cast.string(process.env.redis_pass),
 		dbs: {
-			session: cast.number(process.env.redis_db_session)
+			session: cast.number(process.env.redis_db_session),
+			tempCredential: cast.number(process.env.redis_db_temp_credential)
 		},
 		poolOptions: {
 			min: cast.number(process.env.auth_srv_redis_pool_min),
@@ -115,12 +121,11 @@ export const config: Config = {
 		refreshInterval: cast.number(process.env.auth_srv_ref_data_refresh_interval)
 	},
 
-	session: {
-		ttl: cast.number(process.env.auth_srv_ttl_session),
-		ttlElevated: cast.number(process.env.auth_srv_ttl_elevated_session)
-	},
-
-	password: {
-		ttl: cast.number(process.env.auth_srv_ttl_password)
+	ttls: {
+		session: cast.number(process.env.auth_srv_ttl_session),
+		elevatedSession: cast.number(process.env.auth_srv_ttl_elevated_session),
+		tempCredential: cast.number(process.env.auth_srv_ttl_temp_credential),
+		password: cast.number(process.env.auth_srv_ttl_password),
+		appCredential: cast.number(process.env.auth_srv_ttl_app_credential)
 	}
 };

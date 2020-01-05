@@ -3,6 +3,7 @@ import { db } from '../../../database';
 import { PoolConnection } from 'mysql2';
 import { TransactionType } from '@viva-eng/database';
 import { createUser } from '../../../database/queries/user/create';
+import { createUserPrefs } from '../../../database/queries/user/create-prefs';
 import { lookupUsername } from '../../../database/queries/user/lookup-username';
 import { createCredential } from '../../../database/queries/credential/create-password';
 import { HttpError } from '@celeri/http-error';
@@ -41,6 +42,7 @@ export const createRegistration = async (username: string, password: string) => 
 		const created = await db.runQuery(connection, createUser, { username, userCode });
 		const userId = created.insertId as string;
 
+		await db.runQuery(connection, createUserPrefs, { userId });
 		await db.runQuery(connection, createCredential, { userId, digest });
 
 		await db.commitTransaction(connection);

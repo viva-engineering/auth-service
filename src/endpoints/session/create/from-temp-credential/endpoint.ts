@@ -10,11 +10,8 @@ server
 	.use(bodyParser({ maxSize: '1kb' }))
 	.use(validateBody)
 	.use(async ({ req, res }) => {
-		const token = await authenticateWithTempCredential(req.body.requestId, req.body.verificationKey, req.body.elevated);
-		const payload = JSON.stringify({
-			token,
-			ttl: req.body.elevated ? config.session.ttlElevated : config.session.ttl
-		});
+		const result = await authenticateWithTempCredential(req.body.requestId, req.body.verificationKey, req.body.elevated);
+		const payload = JSON.stringify(result);
 
 		res.writeHead(201, { 'content-type': 'application/json' });
 		res.write(payload);

@@ -1,9 +1,9 @@
 
-import { db, Bit } from '../database';
+import { db } from '../database';
 import { MiddlewareInput, Request } from '@celeri/http-server';
 import { MiddlewareFunction } from '@celeri/middleware-pipeline';
 import { HttpError } from '@celeri/http-error';
-import { UserRole, CredentialType } from '../reference-data';
+import { UserRole } from '../reference-data';
 import { Session, introspectSession } from '../redis/session';
 
 export interface AuthenticatedUser {

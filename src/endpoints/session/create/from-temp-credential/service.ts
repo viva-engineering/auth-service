@@ -4,84 +4,60 @@ import { logger } from '../../../../logger';
 import { generateSessionKey } from '../../../../utils/random-keys';
 import { verifyTempCredential } from '../../../../utils/temp-credential';
 import { createSession, createElevatedSession } from '../../../../redis/session';
-import { getTempCredential } from '../../../../database/queries/credential/get-temp-credential';
-import { increaseFailures } from '../../../../database/queries/credential/increase-failures';
-import { destroyCredential } from '../../../../database/queries/credential/destroy-credential';
-import { TransactionType } from '@viva-eng/database';
+import { updateEmail } from '../../../../database/queries/user/update-email';
+import { updatePhone } from '../../../../database/queries/user/update-phone';
+import { getUserDetails } from '../../../../database/queries/user/get-details';
+import { lookupTempCredential } from '../../../../redis/temp-credential';
 import { HttpError } from '@celeri/http-error';
-import { processVerifications } from './verifications';
-
-const maxFailures = 5;
 
 enum ErrorCodes {
 	InvalidCredentials = 'INVALID_CREDENTIALS',
 	InvalidRequestId = 'INVALID_CREDENTIAL_REQUEST_ID',
-	PasswordExpired = 'PASSWORD_EXPIRED',
 	UnexpectedError = 'UNEXPECTED_ERROR'
 }
 
 export const authenticateWithTempCredential = async (requestId: string, verificationKey: string, elevated: boolean = false) => {
 	const token = await generateSessionKey();
-	const connection = await db.startTransaction(TransactionType.ReadWrite);
-
-	let commit = async () => {
-		commit = async () => { };
-
-		await db.commitTransaction(connection);
-		connection.release();
-	};
 
 	try {
-		const credentials = await db.runQuery(connection, getTempCredential, { requestId });
+		const credential = await lookupTempCredential(requestId);
 
-		if (! credentials.results.length) {
+		if (! credential) {
 			throw new HttpError(401, 'Invalid credential request ID', {
 				code: ErrorCodes.InvalidRequestId
 			});
 		}
 
-		const credential = credentials.results[0];
-		const isValid = await verifyTempCredential(requestId, verificationKey, credential.cred_digest);
+		const isValid = await verifyTempCredential(requestId, verificationKey, credential.secretKeyDigest);
 
 		if (! isValid) {
-			if (credential.cred_recent_failures >= maxFailures) {
-				await db.runQuery(connection, destroyCredential, { credentialId: credential.cred_id });
-			}
-
-			else {
-				await db.runQuery(connection, increaseFailures, { credentialId: credential.cred_id });
-			}
-
-			await commit();
-
 			throw new HttpError(401, 'Invalid credentials', {
 				code: ErrorCodes.InvalidCredentials
 			});
 		}
 
-		await db.runQuery(connection, destroyCredential, { credentialId: credential.cred_id });
-		await processVerifications(connection, credential);
-		await commit();
-
-		if (parseInt(credential.cred_ttl, 10) <= 0 && ! elevated) {
-			await db.runQuery(connection, destroyCredential, { credentialId: credential.cred_id });
-			await commit();
-
-			throw new HttpError(401, 'Invalid credentials', {
-				code: ErrorCodes.InvalidCredentials
+		if (credential.verifiesEmail) {
+			await db.query(updateEmail, {
+				userId: credential.userId,
+				email: credential.verifiesEmail
 			});
 		}
 
+		if (credential.verifiesPhone) {
+			await db.query(updatePhone, {
+				userId: credential.userId,
+				phone: credential.verifiesPhone
+			});
+		}
+
+		const user = await db.query(getUserDetails, { userId: credential.userId });
 		const create = elevated ? createElevatedSession : createSession;
+		const ttl = await create(token, credential.userId, user.results[0].user_role);
 
-		await create(token, credential.user_id, credential.user_role);
-
-		return token;
+		return { token, ttl };
 	}
 
 	catch (error) {
-		await commit();
-
 		if (error instanceof HttpError) {
 			throw error;
 		}

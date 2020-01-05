@@ -15,11 +15,6 @@ export interface ReadApplicationRecord {
 	owner_user_id: string;
 }
 
-/**
- * Query that reads out the basic details about an application, by ID
- *
- *     .
- */
 export const readApplication = new PreparedSelectQuery<ReadApplicationParams, ReadApplicationRecord>({
 	description: 'select ... from application where id = ?',
 	prepared: `

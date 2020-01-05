@@ -13,10 +13,9 @@ enum ErrorCodes {
 export const authenticateWithSession = async (user: AuthenticatedUser) => {
 	try {
 		const token = await generateSessionKey();
+		const ttl = await createSession(token, user.userId, user.userRole, user.applicationId || '');
 
-		await createSession(token, user.userId, user.userRole, user.applicationId || '');
-
-		return token;
+		return { token, ttl };
 	}
 
 	catch (error) {

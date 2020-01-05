@@ -2,6 +2,7 @@
 import { hostname } from 'os';
 import { db } from '../../database';
 import { sessionPool } from '../../redis/session';
+import { tempCredentialPool } from '../../redis/temp-credential';
 import { server } from '../../server';
 
 interface Healthcheck {
@@ -35,15 +36,17 @@ server
 server
 	.get('/healthcheck/full')
 	.use(async ({ req, res }) => {
-		const [ dbResult, redisResult ] = await Promise.all([
+		const [ dbResult, redisSessionsResult, redisTempCredsResult ] = await Promise.all([
 			db.healthcheck(),
-			sessionPool.healthcheck()
+			sessionPool.healthcheck(),
+			tempCredentialPool.healthcheck()
 		]);
 
 		const dependencies: Dependency[] = [
 			dbResult.master,
 			dbResult.replica,
-			redisResult
+			redisSessionsResult,
+			redisTempCredsResult
 		];
 
 		const available = dependencies.every((dependency) => dependency.available);
@@ -55,7 +58,8 @@ server
 			dependencies: {
 				dbMaster: dbResult.master,
 				dbReplica: dbResult.replica,
-				redisSessions: redisResult
+				redisSessions: redisSessionsResult,
+				redisTempCreds: redisTempCredsResult
 			}
 		};
 

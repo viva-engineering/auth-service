@@ -60,10 +60,9 @@ export const authenticateWithApplication = async (username: string, applicationI
 		await commit();
 
 		const token = await generateSessionKey();
+		const ttl = await createSession(token, credential.user_id, credential.user_role, applicationId);
 
-		await createSession(token, credential.user_id, credential.user_role, applicationId);
-
-		return token;
+		return { token, ttl };
 	}
 
 	catch (error) {
