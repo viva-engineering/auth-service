@@ -2,7 +2,8 @@
 const endpoints: string[] = [
 	'./healthcheck/endpoint',
 	'./user/create/endpoint',
-	// './session/create/from-email/endpoint',
+	'./user/update-email/endpoint',
+	'./user/update-phone/endpoint',
 	'./session/create/from-application/endpoint',
 	'./session/create/from-password/endpoint',
 	'./session/create/from-session/endpoint',

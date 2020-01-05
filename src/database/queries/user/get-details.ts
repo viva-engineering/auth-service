@@ -15,11 +15,10 @@ export interface GetUserDetailsRecord {
 	preferred_language: string;
 	user_role: UserRole;
 	password_ttl: string;
-	app_cred_ttl?: string;
 }
 
 export const getUserDetails = new PreparedSelectQuery<GetUserDetailsParams, GetUserDetailsRecord>({
-	description: 'select ... from session, user, credential where id = ?',
+	description: 'select ... from user where id = ?',
 	prepared: `
 		select
 			user.id as user_id,
@@ -29,8 +28,7 @@ export const getUserDetails = new PreparedSelectQuery<GetUserDetailsParams, GetU
 			user.user_code as user_code,
 			pref.preferred_language as preferred_language,
 			role.description as user_role,
-			timestampdiff(second, now(), cred.expiration_timestamp) password_ttl,
-			timestampdiff(second, now(), app_cred.expiration_timestamp) app_cred_tll
+			timestampdiff(second, now(), cred.expiration_timestamp) password_ttl
 		from user user
 		left outer join user_preferences pref
 			on pref.user_id = user.id
@@ -38,9 +36,7 @@ export const getUserDetails = new PreparedSelectQuery<GetUserDetailsParams, GetU
 			on role.id = user.user_role_id
 		left outer join credential cred
 			on cred.user_id = user.id
-		left outer join credential app_cred
-			on app_cred.application_id = sess.application_id
-			and app_cred.user_id = user.id
+			and cred.application_id is null
 		where user.id = ?
 	`,
 

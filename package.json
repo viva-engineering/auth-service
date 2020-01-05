@@ -33,7 +33,7 @@
     "@viva-eng/config-loader": "^1.0.3",
     "@viva-eng/database": "^3.0.3",
     "@viva-eng/logger": "^2.0.0",
-    "@viva-eng/payload-validator": "^1.0.5",
+    "@viva-eng/payload-validator": "^1.0.6",
     "argon2": "^0.25.1",
     "colors": "^1.4.0",
     "generic-pool": "^3.7.1",

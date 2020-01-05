@@ -20,3 +20,11 @@ export const createTempCredential = async () => {
 export const verifyTempCredential = (requestId: string, verificationKey: string, digest: string) => {
 	return verify(digest, `${requestId}${verificationKey}`);
 };
+
+export const sendTempCredentialEmail = async (email: string, oneTimePassword: string) => {
+	require('../logger').logger.warn('Fake email temp credential', { email, oneTimePassword });
+};
+
+export const sendTempCredentialSMS = async (phone: string, oneTimePassword: string) => {
+	require('../logger').logger.warn('Fake SMS temp credential', { phone, oneTimePassword });
+};
