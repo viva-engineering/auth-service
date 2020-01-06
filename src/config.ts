@@ -1,9 +1,8 @@
 
 import { PoolConfig } from 'mysql2';
 import { Options as HasherOptions, argon2id } from 'argon2';
-import { RedisDB } from './redis/pool';
-import { Options as PoolOptions } from 'generic-pool';
 import { cast } from '@viva-eng/config-loader';
+import { RedisDB, RedisConfig } from '@viva-eng/redis-utils';
 
 export interface Config {
 	http: {
@@ -33,7 +32,7 @@ export interface Config {
 			session: RedisDB;
 			tempCredential: RedisDB;
 		},
-		poolOptions: PoolOptions;
+		poolOptions: RedisConfig['pool'];
 	};
 
 	refTables: {

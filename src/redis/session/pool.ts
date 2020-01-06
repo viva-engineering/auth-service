@@ -1,8 +1,28 @@
 
 import { config } from '../../config';
-import { RedisPool } from '../pool';
+import { logger } from '../../logger';
+import { RedisPool } from '@viva-eng/redis-utils';
+import { shutdown } from '../../utils/shutdown';
 
-export const sessionPool = new RedisPool(config.redis.dbs.session, {
-	// Need string numbers because user IDs are bigints
-	string_numbers: true
+const { host, port } = config.redis;
+
+export const sessionPool = new RedisPool({
+	host: host,
+	port: port,
+	db: config.redis.dbs.session,
+	password: config.redis.password,
+	logger: logger,
+	options: {
+		// Need string numbers because user IDs are bigints
+		string_numbers: true
+	},
+	pool: config.redis.poolOptions
+});
+
+shutdown.addOnShutdown(async () => {
+	logger.verbose('Waiting for redis pool to close before shutting down...', { host, port, db: config.redis.dbs.session });
+
+	await this.close();
+
+	logger.verbose('Redis pool closed', { host, port, db: config.redis.dbs.session });
 });

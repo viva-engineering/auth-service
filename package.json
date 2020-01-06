@@ -34,11 +34,10 @@
     "@viva-eng/database": "^3.0.3",
     "@viva-eng/logger": "^2.0.0",
     "@viva-eng/payload-validator": "^1.0.6",
+    "@viva-eng/redis-utils": "^1.0.0",
     "argon2": "^0.25.1",
     "colors": "^1.4.0",
-    "generic-pool": "^3.7.1",
-    "mysql2": "^2.0.2",
-    "redis": "^2.8.0"
+    "mysql2": "^2.0.2"
   },
   "devDependencies": {
     "@types/node": "^11.11.4",
