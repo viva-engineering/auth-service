@@ -87,7 +87,8 @@ export const config: Config = {
 			connectionLimit: cast.number(process.env.auth_srv_db_users_master_connection_limit, 100),
 			supportBigNumbers: true,
 			bigNumberStrings: true,
-			dateStrings: true
+			dateStrings: true,
+			charset: 'utf8mb4_unicode_ci'
 		},
 		replica: {
 			host: cast.string(process.env.db_users_replica_host),
@@ -98,7 +99,8 @@ export const config: Config = {
 			connectionLimit: cast.number(process.env.auth_srv_db_users_replica_connection_limit, 100),
 			supportBigNumbers: true,
 			bigNumberStrings: true,
-			dateStrings: true
+			dateStrings: true,
+			charset: 'utf8mb4_unicode_ci'
 		}
 	},
 

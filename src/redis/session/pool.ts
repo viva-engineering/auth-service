@@ -22,7 +22,7 @@ export const sessionPool = new RedisPool({
 shutdown.addOnShutdown(async () => {
 	logger.verbose('Waiting for redis pool to close before shutting down...', { host, port, db: config.redis.dbs.session });
 
-	await this.close();
+	await sessionPool.close();
 
 	logger.verbose('Redis pool closed', { host, port, db: config.redis.dbs.session });
 });

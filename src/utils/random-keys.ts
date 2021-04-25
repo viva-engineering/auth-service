@@ -60,7 +60,7 @@ export const generateCredentialRequestId = () : Promise<string> => {
  * Generates a short verification key for MFA like email verification
  */
 export const generateVerificationKey = () : Promise<string> => {
-	return randomString(6, verificationKeyCharset);
+	return randomString(9, verificationKeyCharset);
 };
 
 /**
